@@ -71,6 +71,15 @@
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
     };
 
+    ikolomiko = {
+      isNormalUser = true;
+      passwordFile = "/etc/secrets/passwd/ikolomiko";
+      shell = pkgs.zsh;
+      extraGroups = [ "wheel" ];
+      packages = [ pkgs.git pkgs.screen pkgs.vim ];
+      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6fYwAAYEKncSRGjh+xVE8toRB4ztmBFDFX2wShZAPw'' ];
+    };
+
     minecraft = {
       isSystemUser = true;
       home = "/srv/minecraft";
