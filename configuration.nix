@@ -87,6 +87,15 @@
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICqibdeU7gLufY1Hs2AG9V1KjbhSDTM1C1Q6zRrB1h5D'' ];
     };
 
+    f1nch = {
+      isNormalUser = true;
+      passwordFile = "/etc/secrets/passwd/f1nch";
+      shell = pkgs.zsh;
+      extraGroups = [ "wheel" ];
+      packages = [ pkgs.git pkgs.vim ];
+      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKjtQ/SbNBCTSWimPetOw4veFxXANwPNdprjFiEQa2O'' ];
+    };
+
     minecraft = {
       isSystemUser = true;
       home = "/srv/minecraft";
