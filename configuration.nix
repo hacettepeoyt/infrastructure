@@ -107,4 +107,16 @@
   };
 
   users.groups.minecraft = { };
+
+  security.sudo.extraRules = [
+    {
+      groups = [ "minecraft" ];
+      commands = [
+        "/run/current-system/sw/bin/systemctl start minecraft-server"
+        "/run/current-system/sw/bin/systemctl stop minecraft-server"
+        "/run/current-system/sw/bin/systemctl restart minecraft-server"
+        "/run/current-system/sw/bin/journalctl -eu minecraft-server"
+      ];
+    }
+  ];
 }
