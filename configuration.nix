@@ -119,4 +119,22 @@
       ];
     }
   ];
+
+  nixpkgs.overlays = [
+    ( final: prev: {
+        papermc = prev.papermc.overrideAttrs (finalAttrs: previousAttrs: {
+          version = "1.20.2.234";
+
+          src =
+            let
+              mcVersion = prev.lib.versions.pad 3 finalAttrs.version;
+              buildNum = builtins.elemAt (prev.lib.splitVersion finalAttrs.version) 3;
+            in
+            prev.fetchurl {
+              url = "https://papermc.io/api/v2/projects/paper/versions/${mcVersion}/builds/${buildNum}/downloads/paper-${mcVersion}-${buildNum}.jar";
+              hash = "sha256-fR7Dq09iFGVXodQjrS7Hg4NcrKPJbNg0hexU520JC6c=";
+            };
+        });
+    })
+  ];
 }
