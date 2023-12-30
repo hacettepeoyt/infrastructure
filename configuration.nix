@@ -13,6 +13,7 @@
   networking.domain = "";
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 25565 ];
+  networking.firewall.allowedUDPPorts = [ 19132 ];
 
   programs.mosh.enable = true;
   programs.zsh.enable = true;
