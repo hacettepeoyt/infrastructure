@@ -68,7 +68,7 @@
       passwordFile = "/etc/secrets/passwd/div72";
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
-      packages = [ pkgs.git pkgs.tmux pkgs.vim ];
+      packages = [ ]; # packages managed by home-manager
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
     };
 
