@@ -12,7 +12,7 @@
   networking.hostName = "hacettepeoyt-vflower";
   networking.domain = "";
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 80 25565 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 25565 ];
   networking.firewall.allowedUDPPorts = [ 19132 ];
 
   programs.mosh.enable = true;
@@ -20,8 +20,19 @@
 
   services.openssh.enable = true;
 
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "hacettepeoyt_letsencrypt@div72.xyz";
+  };
+
   services.nginx = {
     enable = true;
+
+    virtualHosts."wiki.ozguryazilimhacettepe.com" = {
+      forceSSL = true;
+      enableACME = true;
+      root = "/srv/http/wiki.ozguryazilimhacettepe.com";
+    };
   };
 
   systemd.services.minecraft-server = {
