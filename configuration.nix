@@ -1,5 +1,7 @@
 { config, libs, pkgs, ... }: {
   imports = [
+    <agenix/modules/age.nix>
+
     ./hardware-configuration.nix
     ./networking.nix # generated at runtime by nixos-infect  
   ];
@@ -71,12 +73,13 @@
     };
   };
 
+  age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users)));
   users.mutableUsers = false;
   users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
   users.users = {
     div72 = {
       isNormalUser = true;
-      passwordFile = "/etc/secrets/passwd/div72";
+      passwordFile = config.age.secrets.passwd-div72.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
       packages = [ ]; # packages managed by home-manager
@@ -85,7 +88,7 @@
 
     ikolomiko = {
       isNormalUser = true;
-      passwordFile = "/etc/secrets/passwd/ikolomiko";
+      passwordFile = config.age.secrets.passwd-ikolomiko.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
       packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop ];
@@ -94,14 +97,14 @@
 
     LinoxGH = {
       isNormalUser = true;
-      passwordFile = "/etc/secrets/passwd/LinoxGH";
+      passwordFile = config.age.secrets.passwd-LinoxGH.path;
       extraGroups = [ "minecraft" ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICqibdeU7gLufY1Hs2AG9V1KjbhSDTM1C1Q6zRrB1h5D'' ];
     };
 
     f1nch = {
       isNormalUser = true;
-      passwordFile = "/etc/secrets/passwd/f1nch";
+      passwordFile = config.age.secrets.passwd-f1nch.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
       packages = [ pkgs.git pkgs.vim ];
