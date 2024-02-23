@@ -16,10 +16,12 @@ let
     buildInputs = with pkgs; [
       python311
       python311Packages.aiohttp
+      python311Packages.apscheduler
       python311Packages.pillow
       python311Packages.python-telegram-bot
       python311Packages.pytz
       python311Packages.toml
+      python311Packages.tornado
     ];
 
     patchPhase = ''
