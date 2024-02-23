@@ -15,4 +15,5 @@ in
 builtins.listToAttrs (map (user: { name = "passwd/${user}.age"; value = { publicKeys = userKeys."${user}" ++ [ serverPublicKey ] ++ userKeys.div72; }; }) (builtins.attrNames userKeys)) //
 
 {
+  "services/hu-cafeteria-bot.age".publicKeys = [ serverPublicKey ] ++  userKeys.div72 ++ userKeys.f1nch;
 }

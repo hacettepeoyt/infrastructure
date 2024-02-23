@@ -4,6 +4,8 @@
 
     ./hardware-configuration.nix
     ./networking.nix # generated at runtime by nixos-infect  
+
+    services/hu-cafeteria-bot.nix
   ];
 
   system.stateVersion = "23.05";
@@ -102,7 +104,12 @@
     };
   };
 
-  age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users)));
+  age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users))) // {
+    hu-cafeteria-bot = {
+      file = secrets/hu-cafeteria-bot.age;
+      owner = "hu-cafeteria-bot";
+    };
+  };
   users.mutableUsers = false;
   users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
   users.users = {
@@ -136,7 +143,32 @@
       passwordFile = config.age.secrets.passwd-f1nch.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
-      packages = [ pkgs.git pkgs.vim ];
+      packages = [
+        pkgs.git pkgs.vim pkgs.nix-prefetch
+
+        (pkgs.writeShellScriptBin "bump-cafeteria-bot" ''
+          cd /etc/nixos
+
+          if [ ! -z "$(git status --porcelain)" ]; then
+            echo "Somebody forgot to commit the changes! Exiting."
+            exit 1
+          fi
+
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            echo "You need to forward your SSH agent. (ssh -A ...)"
+            exit 1
+          fi
+
+          new_hash=$(nix-prefetch fetchFromGitHub --owner hacettepeoyt --repo hu-cafeteria-bot --rev "$1" 2>/dev/null)
+          sed -i -r -e 's|hash = "sha256-[a-zA-Z0-9/=]+";|hash = "'"$new_hash"'";|g' /etc/nixos/services/hu-cafeteria-bot.nix
+          sed -i -r -e 's|version = "[0-9.-]+";|version = "'"$1"'";|g' /etc/nixos/services/hu-cafeteria-bot.nix
+
+          sudo nixos-rebuild switch
+          git add /etc/nixos/services/hu-cafeteria-bot.nix
+          git commit -m "services: bump hu-cafeteria-bot to $1"
+          git push
+        '')
+      ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKjtQ/SbNBCTSWimPetOw4veFxXANwPNdprjFiEQa2O'' ];
     };
 
