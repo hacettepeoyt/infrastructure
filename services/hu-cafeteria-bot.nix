@@ -1,6 +1,6 @@
 { config, pkgs, ... }: 
 let
-  version = "2.1.0";
+  version = "2.1.1";
 
   pkg = pkgs.stdenv.mkDerivation {
     pname = "hu-cafeteria-bot";
@@ -10,7 +10,7 @@ let
       owner = "hacettepeoyt";
       repo = "hu-cafeteria-bot";
       rev = "v${version}";
-      hash = "sha256-rVswyICPMNS6HnnpcixEPtFc1mn3ogs9nrPBZNizCoQ=";
+      hash = "sha256-hFhBGkCPQWPVICpAH2oGEP6DyiU8JRK3RBJtDGFVzFA=";
     };
 
     buildInputs = with pkgs; [
