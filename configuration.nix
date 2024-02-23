@@ -149,6 +149,8 @@
         (pkgs.writeShellScriptBin "bump-cafeteria-bot" ''
           cd /etc/nixos
 
+          set -e
+
           if [ ! -z "$(git status --porcelain)" ]; then
             echo "Somebody forgot to commit the changes! Exiting."
             exit 1
