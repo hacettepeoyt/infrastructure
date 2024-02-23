@@ -38,7 +38,7 @@
   };
 
   systemd.services.minecraft-server = {
-    enable = true;
+    enable = false;
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     startLimitBurst = 3;
