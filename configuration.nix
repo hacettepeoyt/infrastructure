@@ -66,6 +66,17 @@
         };
       };
     };
+
+    virtualHosts."hucafeteriabot.ozguryazilimhacettepe.com" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:48879";
+        };
+      };
+    };
   };
 
   systemd.services.minecraft-server = {
