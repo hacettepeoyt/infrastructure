@@ -22,6 +22,13 @@
 
   services.openssh.enable = true;
 
+  virtualisation.docker.enable = true;
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "hacettepeoyt_letsencrypt@div72.xyz";
@@ -34,6 +41,28 @@
       forceSSL = true;
       enableACME = true;
       root = "/srv/http/wiki.ozguryazilimhacettepe.com";
+    };
+
+    virtualHosts."intin.com.tr" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:8282";
+        };
+      };
+    };
+
+    virtualHosts."api.intin.com.tr" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:8383";
+        };
+      };
     };
   };
 
@@ -90,7 +119,7 @@
       isNormalUser = true;
       passwordFile = config.age.secrets.passwd-ikolomiko.path;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "docker" ];
       packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6fYwAAYEKncSRGjh+xVE8toRB4ztmBFDFX2wShZAPw'' ];
     };
