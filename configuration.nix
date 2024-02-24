@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./networking.nix # generated at runtime by nixos-infect  
 
+    services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
   ];
 
@@ -77,6 +78,17 @@
         };
       };
     };
+
+    virtualHosts."huannouncementbot.ozguryazilimhacettepe.com" = {
+      forceSSL = true;
+      enableACME = true;
+
+      locations = {
+        "/" = {
+          proxyPass = "http://localhost:51966";
+        };
+      };
+    };
   };
 
   systemd.services.minecraft-server = {
@@ -119,6 +131,10 @@
     hu-cafeteria-bot = {
       file = secrets/services/hu-cafeteria-bot.age;
       owner = "hu-cafeteria-bot";
+    };
+    hu-announcement-bot = {
+      file = secrets/services/hu-announcement-bot.age;
+      owner = "hu-announcement-bot";
     };
   };
   users.mutableUsers = false;
