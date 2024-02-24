@@ -89,6 +89,12 @@
         };
       };
     };
+
+    virtualHosts."status.ozguryazilimhacettepe.com" = {
+      forceSSL = true;
+      enableACME = true;
+      root = "/var/lib/statie";
+    };
   };
 
   systemd.services.minecraft-server = {
@@ -212,9 +218,29 @@
       group = "minecraft";
       packages = [ pkgs.papermc ];
     };
+
+    statie = {
+      isSystemUser = true;
+      home = "/var/lib/statie";
+      createHome = true;
+      homeMode = "755";
+      group = "statie";
+      packages = [ pkgs.gnuplot ];
+    };
+
   };
 
   users.groups.minecraft = { };
+  users.groups.statie = { };
+
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      "*/15 * * * *      statie    /var/lib/statie/hacettepeoyt.sh > /var/lib/statie/index.html 2> /var/lib/statie/error.log"
+    ];
+  };
+
+  environment.systemPackages = [ pkgs.gnuplot ];
 
   security.sudo.extraRules = [
     {
