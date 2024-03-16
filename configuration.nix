@@ -7,6 +7,7 @@
 
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
+    services/mail.nix
   ];
 
   system.stateVersion = "23.05";
