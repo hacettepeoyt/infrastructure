@@ -9,6 +9,7 @@
     services/hu-cafeteria-bot.nix
     services/jitsi.nix
     services/mail.nix
+    services/oyt-website.nix
   ];
 
   system.stateVersion = "23.05";
