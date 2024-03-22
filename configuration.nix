@@ -17,6 +17,14 @@
   boot.cleanTmpDir = true;
   zramSwap.enable = true;
 
+  # DO NOT TOUCH THIS. Otherwise after a while /boot will fill up and all hell will break loose.
+  boot.loader.grub.configurationLimit = 2;
+  nix.gc = {
+    automatic = true;
+    randomizedDelaySec = "14m";
+    options = "--delete-older-than 10d";
+  };
+
   networking.hostName = "hacettepeoyt-vflower";
   networking.domain = "";
   networking.firewall.enable = true;
