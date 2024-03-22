@@ -14,7 +14,7 @@
 
   system.stateVersion = "23.05";
 
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
 
   # DO NOT TOUCH THIS. Otherwise after a while /boot will fill up and all hell will break loose.
@@ -163,7 +163,7 @@
   users.users = {
     div72 = {
       isNormalUser = true;
-      passwordFile = config.age.secrets.passwd-div72.path;
+      hashedPasswordFile = config.age.secrets.passwd-div72.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
       packages = [ ]; # packages managed by home-manager
@@ -172,7 +172,7 @@
 
     ikolomiko = {
       isNormalUser = true;
-      passwordFile = config.age.secrets.passwd-ikolomiko.path;
+      hashedPasswordFile = config.age.secrets.passwd-ikolomiko.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" "docker" ];
       packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop ];
@@ -181,14 +181,14 @@
 
     LinoxGH = {
       isNormalUser = true;
-      passwordFile = config.age.secrets.passwd-LinoxGH.path;
+      hashedPasswordFile = config.age.secrets.passwd-LinoxGH.path;
       extraGroups = [ "minecraft" ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICqibdeU7gLufY1Hs2AG9V1KjbhSDTM1C1Q6zRrB1h5D'' ];
     };
 
     f1nch = {
       isNormalUser = true;
-      passwordFile = config.age.secrets.passwd-f1nch.path;
+      hashedPasswordFile = config.age.secrets.passwd-f1nch.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" ];
       packages = [
