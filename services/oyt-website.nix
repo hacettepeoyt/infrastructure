@@ -1,6 +1,6 @@
-{ age, config, pkgs, ... }: 
+{ config, pkgs, ... }:
 let
-  version = "1.0.0";
+  version = "2.1";
 
   pkg = pkgs.stdenv.mkDerivation {
     pname = "oyt-website";
@@ -10,7 +10,7 @@ let
       owner = "hacettepeoyt";
       repo = "oyt-website";
       rev = "v${version}";
-      hash = "sha256-AAAA=";
+      hash = "sha256-D6wVblTVXsCHiBjrtlwvg6goBoDnwE/4WD09k/YnK8w=";
     };
 
     buildInputs = with pkgs; [
@@ -31,9 +31,27 @@ let
   python = pkgs.python311.withPackages (ppkgs: pkg.buildInputs);
 in
 {
-  age.secrets.oyt-website = {
-    file = secrets/services/oyt-website.age;
-    owner = "oyt-website";
+  services.nginx.virtualHosts."ozguryazilimhacettepe.com" = {
+    enableACME = true;
+    forceSSL = true;
+
+    locations = {
+      "/" = {
+        proxyPass = "http://localhost:8000";
+      };
+
+      "/static" = {
+        root = "${pkg}/oytwebsite";
+      };
+
+      "/static/admin" = {
+        root = "${pkgs.python311Packages.django}/lib/python3.11/site-packages/django/contrib/admin";
+      };
+
+      "/media" = {
+        root = "/var/lib/oyt-website";
+      };
+    };
   };
 
   systemd.services.oyt-website = {
@@ -44,7 +62,7 @@ in
     startLimitIntervalSec = 60;
 
     environment = {
-      CONFIG_FILE = "${age.secrets.oyt-website.path}";
+      CONFIG_FILE = "${config.age.secrets.oyt-website.path}";
     };
 
     serviceConfig = {
@@ -72,7 +90,7 @@ in
       RestrictRealtime = true;
       RestrictSUIDSGID = true;
       SystemCallArchitectures = "native";
-      UMask = "0007";
+      UMask = "0027";
     };
   };
 
@@ -80,10 +98,12 @@ in
     isSystemUser = true;
     home = "/var/lib/oyt-website";
     createHome = true;
-    homeMode = "770";
+    homeMode = "750";
     group = "oyt-website";
     packages = pkg.buildInputs;
   };
     
-  users.groups.oyt-website = { };
+  users.groups.oyt-website = {
+    members = [ "oyt-website" "nginx" ];
+  };
 }

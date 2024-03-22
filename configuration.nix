@@ -145,6 +145,10 @@
       file = secrets/services/hu-announcement-bot.age;
       owner = "hu-announcement-bot";
     };
+    oyt-website = {
+      file = secrets/services/oyt-website.age;
+      owner = "oyt-website";
+    };
   };
   users.mutableUsers = false;
   users.users.root.openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
