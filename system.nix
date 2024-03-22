@@ -1,7 +1,5 @@
 { config, libs, pkgs, ... }: {
   imports = [
-    <agenix/modules/age.nix>
-
     ./hardware-configuration.nix
     ./networking.nix # generated at runtime by nixos-infect  
 
