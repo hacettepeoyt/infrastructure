@@ -24,6 +24,8 @@
   };
 
   networking.hostName = "hacettepeoyt-vflower";
+  networking.enableIPv6 = true;
+  networking.useDHCP = true;
   networking.domain = "";
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 25565 ];
