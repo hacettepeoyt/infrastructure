@@ -1,7 +1,6 @@
 { config, libs, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ./networking.nix # generated at runtime by nixos-infect  
 
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
