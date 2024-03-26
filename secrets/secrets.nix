@@ -1,7 +1,7 @@
 let
   serverPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXqBeVR2JHYUatQYM4cy03MKmkotHhR2drHJfzKi/Nl";
 
-  conf = (import ../configuration.nix) { config = {}; libs = {}; pkgs = {}; };
+  conf = (import ../system.nix) { config = {}; libs = {}; pkgs = {}; };
 
   # A normal user to ssh key mapping. Automated way of declaring the following using the authorizedKeys from configuration.nix:
   # users = {
