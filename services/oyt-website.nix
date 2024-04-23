@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  version = "2.1";
+  version = "2.2";
 
   pkg = pkgs.stdenv.mkDerivation {
     pname = "oyt-website";
@@ -10,7 +10,7 @@ let
       owner = "hacettepeoyt";
       repo = "oyt-website";
       rev = "v${version}";
-      hash = "sha256-D6wVblTVXsCHiBjrtlwvg6goBoDnwE/4WD09k/YnK8w=";
+      hash = "sha256-xErGcuosjh5zB03G0t5wyf2uol16/WBFpzMR2kphhQ0=";
     };
 
     buildInputs = with pkgs; [
