@@ -34,6 +34,7 @@
   programs.zsh.enable = true;
 
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
 
   virtualisation.docker.enable = true;
 
