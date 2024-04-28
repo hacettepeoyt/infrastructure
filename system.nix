@@ -175,7 +175,7 @@
       hashedPasswordFile = config.age.secrets.passwd-ikolomiko.path;
       shell = pkgs.zsh;
       extraGroups = [ "wheel" "docker" ];
-      packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop ];
+      packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop pkgs.ncdu ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6fYwAAYEKncSRGjh+xVE8toRB4ztmBFDFX2wShZAPw'' ];
     };
 
