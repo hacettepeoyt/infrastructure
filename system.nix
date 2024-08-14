@@ -210,7 +210,7 @@
           fi
 
           sudo chgrp -R wheel /etc/nixos
-          sudo chown -R g+w /etc/nixos
+          sudo chmod -R g+w /etc/nixos
 
           new_hash=$(nix-prefetch fetchFromGitHub --owner hacettepeoyt --repo hu-cafeteria-bot --rev "v$1")
           sed -i -r -e 's|hash = "sha256-[a-zA-Z0-9/=]+";|hash = "'"$new_hash"'";|g' /etc/nixos/services/hu-cafeteria-bot.nix
@@ -238,7 +238,7 @@
           fi
 
           sudo chgrp -R wheel /etc/nixos
-          sudo chown -R g+w /etc/nixos
+          sudo chmod -R g+w /etc/nixos
 
           new_hash=$(nix-prefetch fetchFromGitHub --owner hacettepeoyt --repo hu-announcement-bot --rev "v$1")
           sed -i -r -e 's|hash = "sha256-[a-zA-Z0-9/=]+";|hash = "'"$new_hash"'";|g' /etc/nixos/services/hu-announcement-bot.nix
