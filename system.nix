@@ -22,6 +22,8 @@
     options = "--delete-older-than 10d";
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   networking.hostName = "hacettepeoyt-vflower";
   networking.enableIPv6 = true;
   networking.useDHCP = true;
