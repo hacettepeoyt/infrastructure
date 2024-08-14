@@ -1,6 +1,6 @@
 { config, pkgs, ... }: 
 let
-  version = "3.5.0";
+  version = "3.6.0";
 
   pkg = pkgs.stdenv.mkDerivation {
     pname = "hu-announcement-bot";
@@ -10,7 +10,7 @@ let
       owner = "hacettepeoyt";
       repo = "hu-announcement-bot";
       rev = "v${version}";
-      hash = "sha256-Rr9Ura3KexgfQhECDuR5+E5JH5FSweTeEf7cmkqfrXI=";
+      hash = "sha256-Av4q8joEQKuDFWPrNx664TcyMPTxBrGt1i16videmXo=";
     };
 
     buildInputs = with pkgs; [
