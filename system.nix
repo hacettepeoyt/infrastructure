@@ -81,17 +81,6 @@
       };
     };
 
-    virtualHosts."hucafeteriabot.ozguryazilimhacettepe.com" = {
-      forceSSL = true;
-      enableACME = true;
-
-      locations = {
-        "/" = {
-          proxyPass = "http://localhost:48879";
-        };
-      };
-    };
-
     virtualHosts."huannouncementbot.ozguryazilimhacettepe.com" = {
       forceSSL = true;
       enableACME = true;

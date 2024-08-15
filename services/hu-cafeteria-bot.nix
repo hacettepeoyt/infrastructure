@@ -1,88 +1,17 @@
 { config, pkgs, ... }: 
-let
-  version = "2.1.1";
-
-  pkg = pkgs.stdenv.mkDerivation {
-    pname = "hu-cafeteria-bot";
-    inherit version;
-
-    src = pkgs.fetchFromGitHub {
-      owner = "hacettepeoyt";
-      repo = "hu-cafeteria-bot";
-      rev = "v${version}";
-      hash = "sha256-hFhBGkCPQWPVICpAH2oGEP6DyiU8JRK3RBJtDGFVzFA=";
-    };
-
-    buildInputs = with pkgs; [
-      python311
-      python311Packages.aiohttp
-      python311Packages.apscheduler
-      python311Packages.pillow
-      python311Packages.python-telegram-bot
-      python311Packages.pytz
-      python311Packages.toml
-      python311Packages.tornado
-    ];
-
-    patchPhase = ''
-      sed -i -r -e 's|database.json|/var/lib/hu-cafeteria-bot/database.json|g' src/bot.py
-      sed -i -r -e 's|menu.png|/var/lib/hu-cafeteria-bot/menu.png|g' src/bot.py src/image.py
-    '';
-
-    installPhase = ''
-      cp -r . $out
-    '';
-  };
-
-  python = pkgs.python311.withPackages (ppkgs: pkg.buildInputs);
-in
 {
-  systemd.services.hu-cafeteria-bot = {
+  services.hu-cafeteria-bot = {
     enable = true;
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    startLimitBurst = 3;
-    startLimitIntervalSec = 60;
+    hostname = "hucafeteriabot.ozguryazilimhacettepe.com";
+    environmentFile = config.age.secrets.hu-cafeteria-bot.path;
 
-    serviceConfig = {
-      # ExecStart = "/run/current-system/sw/bin/bash -c 'python ${pkg}/src/bot.py /etc/hu-cafeteria-bot.toml'";
-      # ExecStart = "${pkgs.python311}/bin/python ${pkg}/src/bot.py /etc/hu-cafeteria-bot.toml";
-      ExecStart = "${python}/bin/python -m src ${config.age.secrets.hu-cafeteria-bot.path}";
+    settings = {
+      # Setted in environmentFile.
+      TELEGRAM_API_KEY = "$TELEGRAM_API_KEY";
 
-      Restart = "always";
-      WorkingDirectory = "${pkg}";
-      User = "hu-cafeteria-bot";
-      Group = "hu-cafeteria-bot";
-      Type = "simple";
-
-      LockPersonality = true;
-      PrivateDevices = true;
-      PrivateTmp = true;
-      PrivateUsers = true;
-      ProtectClock = true;
-      ProtectControlGroups = true;
-      ProtectHome = true;
-      ProtectHostname = true;
-      ProtectKernelLogs = true;
-      ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      ProtectProc = "invisible";
-      RestrictNamespaces = true;
-      RestrictRealtime = true;
-      RestrictSUIDSGID = true;
-      SystemCallArchitectures = "native";
-      UMask = "0007";
+      IMAGE_CHANNEL_ID = -1001534922038;
+      TEXT_CHANNEL_ID = -1001815648235;
+      LOGGER_CHAT_ID = -874312282;
     };
   };
-
-  users.users.hu-cafeteria-bot = {
-    isSystemUser = true;
-    home = "/var/lib/hu-cafeteria-bot";
-    createHome = true;
-    homeMode = "770";
-    group = "hu-cafeteria-bot";
-    packages = pkg.buildInputs;
-  };
-    
-  users.groups.hu-cafeteria-bot = { };
 }
