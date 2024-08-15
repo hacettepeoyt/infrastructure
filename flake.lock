@@ -65,6 +65,24 @@
         "type": "github"
       }
     },
+    "hu-cafeteria-bot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1723727726,
+        "narHash": "sha256-S7v8rAxOYzYkEZn/lRm08mv9EAuDrv6OV9+TaQTZ5FY=",
+        "owner": "hacettepeoyt",
+        "repo": "hu-cafeteria-bot",
+        "rev": "517046a8d415939e2a0f386944371514305a459a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hacettepeoyt",
+        "repo": "hu-cafeteria-bot",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1703013332,
@@ -83,6 +101,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1723673859,
+        "narHash": "sha256-FLYl6raDlRSUf6o3DkbCg/KkOUBGHcyNKZ0RlzoSLcA=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "c55e2908deb848d0e94d8170cb4b0a1e9bc30c8c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1719690277,
         "narHash": "sha256-0xSej1g7eP2kaUF+JQp8jdyNmpmCJKRpO12mKl/36Kc=",
         "owner": "NixOS",
@@ -100,7 +133,8 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "nixpkgs": "nixpkgs_2"
+        "hu-cafeteria-bot": "hu-cafeteria-bot",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
