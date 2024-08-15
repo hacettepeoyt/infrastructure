@@ -1,0 +1,19 @@
+---
+name: "Periodic Pull"
+
+on:
+  schedule:
+    - cron: '13 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  periodic-pull:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git clone --mirror ${{ vars.PULL_MIRROR_URL }} repository
+          cd repository
+          git remote add github https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git push --all github
