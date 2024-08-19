@@ -136,10 +136,6 @@
   };
 
   age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users))) // {
-    hu-cafeteria-bot = {
-      file = secrets/services/hu-cafeteria-bot.age;
-      owner = "hu-cafeteria-bot";
-    };
     hu-announcement-bot = {
       file = secrets/services/hu-announcement-bot.age;
       owner = "hu-announcement-bot";

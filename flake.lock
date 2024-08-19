@@ -70,11 +70,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1723727726,
-        "narHash": "sha256-S7v8rAxOYzYkEZn/lRm08mv9EAuDrv6OV9+TaQTZ5FY=",
+        "lastModified": 1724080196,
+        "narHash": "sha256-Z7cJLHBtiTN1JOVya6ETQnU36M2JnjTWx9a7c3PAFkY=",
         "owner": "hacettepeoyt",
         "repo": "hu-cafeteria-bot",
-        "rev": "517046a8d415939e2a0f386944371514305a459a",
+        "rev": "481b187b228f12750d745c4fc8fe69ed0d6086a3",
         "type": "github"
       },
       "original": {
