@@ -191,7 +191,7 @@ in
   services.mailman = {
     enable = true;
     enablePostfix = false;
-    siteOwner = "mailman@div72.xyz";
+    siteOwner = "postmaster@ozguryazilimhacettepe.com";
     webHosts = [ "lists.tlkg.org.tr" ];
     hyperkitty.enable = true;
     serve.enable = true;
