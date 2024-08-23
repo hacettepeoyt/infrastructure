@@ -178,7 +178,7 @@ in
       # SMTP for mailman
       # TODO: This should not be exposed to the whole server?
       smtp tcp://127.0.0.1:2525 {
-          destination postmaster $(local_domains) {
+          destination postmaster lists.tlkg.org.tr {
               deliver_to &local_routing
           }
           default_destination {
