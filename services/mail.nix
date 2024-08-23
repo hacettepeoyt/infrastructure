@@ -28,7 +28,7 @@ in
 
     hostname = domain;
     primaryDomain = "ozguryazilimhacettepe.com";
-    localDomains = [ "ozguryazilimhacettepe.com" ];
+    localDomains = [ "ozguryazilimhacettepe.com" "lists.tlkg.org.tr" ];
     config = ''
       auth.pass_table local_authdb {
           table sql_table {
@@ -57,6 +57,10 @@ in
           # destination lists.example.org {
           #     deliver_to lmtp tcp://127.0.0.1:8024
           # }
+
+          destination lists.tlkg.org.tr {
+              deliver_to lmtp tcp://127.0.0.1:8024
+          }
 
           destination postmaster $(local_domains) {
               modify {
@@ -170,6 +174,39 @@ in
           auth &local_authdb
           storage &local_mailboxes
       }
+
+      # SMTP for mailman
+      # TODO: This should not be exposed to the whole server?
+      smtp tcp://127.0.0.1:2525 {
+          destination postmaster $(local_domains) {
+              deliver_to &local_routing
+          }
+          default_destination {
+              deliver_to &remote_queue
+          }
+      }
   '';
+  };
+
+  services.mailman = {
+    enable = true;
+    enablePostfix = false;
+    siteOwner = "mailman@div72.xyz";
+    # FIXME: This should not be necessary, see NixOS/nixpkgs#214897.
+    webHosts = [ "localhost" ];
+    settings = {
+      mta = {
+        # FIXME: This should not be necessary for null mta?
+        configuration = "/dev/null";
+
+        incoming = "mailman.mta.null.NullMTA";
+        lmtp_host = "127.0.0.1";
+        lmtp_port = "8024";
+
+        outgoing = "mailman.mta.deliver.deliver";
+        smtp_host = "127.0.0.1";
+        smtp_port = "2525";
+      };
+    };
   };
 }
