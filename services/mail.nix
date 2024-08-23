@@ -7,7 +7,7 @@ in
   services.nginx.virtualHosts."${domain}".enableACME = true;
   security.acme.certs."${domain}".group = "maddy";
   users.groups."maddy" = {
-    members = [ "maddy" "nginx" ];
+    members = [ "maddy" "nginx" "mailman" ];
   };
 
   # TODO: I'd much prefer PAM authentication here, but I could not get it to work.
@@ -188,6 +188,8 @@ in
   '';
   };
 
+  systemd.services.mailman.serviceConfig.ExecStartPre = "!/run/current-system/sw/bin/bash -c 'chmod g+r /var/lib/maddy/dkim_keys/*.key'";
+
   services.mailman = {
     enable = true;
     enablePostfix = false;
@@ -207,6 +209,12 @@ in
         outgoing = "mailman.mta.deliver.deliver";
         smtp_host = "127.0.0.1";
         smtp_port = "2525";
+      };
+      ARC = {
+        enabled = "yes";
+        authserv_id = "mail.ozguryazilimhacettepe.com";
+        domain = "lists.tlkg.org.tr";
+        privkey = "/var/lib/maddy/dkim_keys/lists.tlkg.org.tr_default.key";
       };
     };
     webSettings = {
