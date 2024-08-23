@@ -192,8 +192,8 @@ in
     enable = true;
     enablePostfix = false;
     siteOwner = "mailman@div72.xyz";
-    # FIXME: This should not be necessary, see NixOS/nixpkgs#214897.
-    webHosts = [ "localhost" ];
+    webHosts = [ "lists.tlkg.org.tr" ];
+    serve.enable = true;
     settings = {
       mta = {
         # FIXME: This should not be necessary for null mta?
