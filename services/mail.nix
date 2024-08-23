@@ -193,6 +193,7 @@ in
     enablePostfix = false;
     siteOwner = "mailman@div72.xyz";
     webHosts = [ "lists.tlkg.org.tr" ];
+    hyperkitty.enable = true;
     serve.enable = true;
     settings = {
       mta = {
