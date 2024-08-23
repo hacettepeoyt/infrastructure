@@ -210,4 +210,10 @@ in
       };
     };
   };
+
+  # This is necessary as services.mailman.serve.enable does not turn on TLS.
+  services.nginx.virtualHosts."lists.tlkg.org.tr" = {
+    enableACME = true;
+    forceSSL = true;
+  };
 }
