@@ -191,7 +191,7 @@ in
   services.mailman = {
     enable = true;
     enablePostfix = false;
-    siteOwner = "postmaster@ozguryazilimhacettepe.com";
+    siteOwner = "mailman@div72.xyz";
     webHosts = [ "lists.tlkg.org.tr" ];
     hyperkitty.enable = true;
     serve.enable = true;
@@ -208,6 +208,10 @@ in
         smtp_host = "127.0.0.1";
         smtp_port = "2525";
       };
+    };
+    webSettings = {
+      DEFAULT_FROM_EMAIL = "noreply@lists.tlkg.org.tr";
+      SERVER_EMAIL = "noreply@lists.tlkg.org.tr";
     };
   };
 
