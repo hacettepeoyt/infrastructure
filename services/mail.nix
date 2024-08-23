@@ -212,6 +212,7 @@ in
     webSettings = {
       DEFAULT_FROM_EMAIL = "noreply@lists.tlkg.org.tr";
       SERVER_EMAIL = "noreply@lists.tlkg.org.tr";
+      EMAIL_PORT = "2525";
     };
   };
 
