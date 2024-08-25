@@ -37,7 +37,7 @@ in
 
     hostname = domain;
     primaryDomain = "ozguryazilimhacettepe.com";
-    localDomains = [ "ozguryazilimhacettepe.com" ];
+    localDomains = [ "ozguryazilimhacettepe.com" "lists.tlkg.org.tr" ];
     config = ''
       auth.pass_table local_authdb {
           table sql_table {
@@ -66,6 +66,14 @@ in
           # destination lists.example.org {
           #     deliver_to lmtp tcp://127.0.0.1:8024
           # }
+
+          destination lists.tlkg.org.tr {
+              check {
+                  command ${pkgs.mailpot}/bin/mpot -q -c "${mailpotConf}" post
+              }
+
+              deliver_to dummy
+          }
 
           destination postmaster $(local_domains) {
               modify {
@@ -105,6 +113,16 @@ in
                   reject 550 5.1.1 "User doesn't exist"
               }
           }
+      }
+
+      smtp tcp://127.0.0.1:2525 {
+        destination postmaster $(local_domains) {
+            deliver_to &local_routing
+        }
+
+        default_destination {
+            deliver_to &remote_queue
+        }
       }
 
       submission tls://0.0.0.0:465 tcp://0.0.0.0:587 {
