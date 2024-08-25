@@ -1,7 +1,16 @@
-{ config, options, ... }:
+{ config, options, pkgs, ... }:
 
 let
   domain = "mail.ozguryazilimhacettepe.com";
+
+  mailpotConf = pkgs.writeText "mailpot.toml" ''
+    db_path = "/var/lib/mailpot/mailpot.sqlite"
+    data_path = "/var/lib/mailpot"
+
+    [send_mail]
+    type = "Smtp"
+    value = { hostname = "localhost", port = 2525, auth = { type = "none" }, security = { type = "none" } }
+  '';
 in
 {
   services.nginx.virtualHosts."${domain}".enableACME = true;
