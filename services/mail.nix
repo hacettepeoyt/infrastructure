@@ -87,7 +87,7 @@ in
 
           destination lists.tlkg.org.tr {
               check {
-                  command ${mailpot}/bin/mpot -q -c "${mailpotConf}" post
+                  command /run/wrappers/bin/sudo -u mailpot ${mailpot}/bin/mpot -q -c "${mailpotConf}" post
               }
 
               deliver_to dummy
@@ -227,4 +227,8 @@ in
     homeMode = "770";
     group = "maddy";
   };
+
+  security.sudo.extraRules = [
+    { users = [ "maddy" ]; runAs = "mailpot"; commands = [ { command = "${mailpot}/bin/mpot"; options = [ "NOPASSWD" ]; } ]; }
+  ];
 }
