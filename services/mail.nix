@@ -1,7 +1,25 @@
-{ config, options, ... }:
+{ config, options, pkgs, ... }:
 
 let
   domain = "mail.ozguryazilimhacettepe.com";
+
+  mailpot = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "mailpot";
+    version = "0.1.1+git";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "meli";
+      repo = "mailpot";
+      rev = "3366e3b12e287edfa78a4fe62dba06db0005ca73";
+      hash = "sha256-cS9xCKOnOi5eOYgdVTNp0EEtRzEMr2K1Myb80Kmskfw=";
+    };
+
+    cargoHash = "sha256-q7sCSGU8xp81Fqpx8zn2zyk16IFaBVuOxSpxtSB92Sg=";
+
+    buildInputs = [ pkgs.openssl ];
+    nativeBuildInputs = [ pkgs.pkg-config ];
+    nativeCheckInputs = [ pkgs.openssh pkgs.sqlite ];
+  };
 in
 {
   services.nginx.virtualHosts."${domain}".enableACME = true;
