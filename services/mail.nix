@@ -20,6 +20,15 @@ let
     nativeBuildInputs = [ pkgs.pkg-config ];
     nativeCheckInputs = [ pkgs.openssh pkgs.sqlite ];
   };
+
+  mailpotConf = pkgs.writeText "mailpot.toml" ''
+    db_path = "/var/lib/mailpot/mailpot.sqlite"
+    data_path = "/var/lib/mailpot"
+
+    [send_mail]
+    type = "Smtp"
+    value = { hostname = "localhost", port = 2525, auth = { type = "None" } }
+  '';
 in
 {
   services.nginx.virtualHosts."${domain}".enableACME = true;
@@ -78,7 +87,7 @@ in
 
           destination lists.tlkg.org.tr {
               check {
-                  command ${mailpot}/bin/mpot -q post
+                  command ${mailpot}/bin/mpot -q -c "${mailpotConf}" post
               }
 
               deliver_to dummy
@@ -207,5 +216,15 @@ in
           storage &local_mailboxes
       }
   '';
+  };
+
+  # FIXME: temp
+  environment.systemPackages = [ pkgs.sqlite ];
+  users.users.mailpot = {
+    isSystemUser = true;
+    home = "/var/lib/mailpot";
+    createHome = true;
+    homeMode = "770";
+    group = "maddy";
   };
 }
