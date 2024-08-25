@@ -87,7 +87,7 @@ in
 
           destination lists.tlkg.org.tr {
               check {
-                  command /run/wrappers/bin/sudo -u mailpot ${mailpot}/bin/mpot -q -c "${mailpotConf}" post
+                  command ${mailpot}/bin/mpot -q -c "${mailpotConf}" post
               }
 
               deliver_to dummy
@@ -228,7 +228,5 @@ in
     group = "maddy";
   };
 
-  security.sudo.extraRules = [
-    { users = [ "maddy" ]; runAs = "mailpot"; commands = [ { command = "${mailpot}/bin/mpot"; options = [ "NOPASSWD" ]; } ]; }
-  ];
+  systemd.services.maddy.serviceConfig.ReadWritePaths = [ "/var/lib/maddy" "/var/lib/mailpot" ];
 }
