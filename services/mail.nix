@@ -1,7 +1,18 @@
-{ config, options, ... }:
+{ config, options, pkgs, ... }:
 
 let
   domain = "mail.ozguryazilimhacettepe.com";
+
+  mlmmjReceiveHelper = pkgs.writeShellScriptBin "mlmmj-receive-helper" ''
+    list=$(sed -E 's/(\+[a-z]+)@[a-z.]+//g' <<< "$1")
+
+    if ! ls /var/lib/mlmmj | grep -E '^'"$list"'$'; then
+        echo "Non-existant list: $list" 1>&2
+        exit 1
+    fi
+
+    exec ${pkgs.mlmmj}/bin/mlmmj-receive -L "/var/lib/mlmmj/$list"
+  '';
 in
 {
   services.nginx.virtualHosts."${domain}".enableACME = true;
@@ -28,7 +39,7 @@ in
 
     hostname = domain;
     primaryDomain = "ozguryazilimhacettepe.com";
-    localDomains = [ "ozguryazilimhacettepe.com" ];
+    localDomains = [ "ozguryazilimhacettepe.com" "lists.tlkg.org.tr" ];
     config = ''
       auth.pass_table local_authdb {
           table sql_table {
@@ -57,6 +68,14 @@ in
           # destination lists.example.org {
           #     deliver_to lmtp tcp://127.0.0.1:8024
           # }
+
+          destination lists.tlkg.org.tr {
+              check {
+                  command ${mlmmjReceiveHelper}/bin/mlmmj-receive-helper {rcpts}
+              }
+
+              deliver_to dummy
+          }
 
           destination postmaster $(local_domains) {
               modify {
@@ -96,6 +115,16 @@ in
                   reject 550 5.1.1 "User doesn't exist"
               }
           }
+      }
+
+      smtp tcp://127.0.0.1:2525 {
+        destination postmaster $(local_domains) {
+            deliver_to &local_routing
+        }
+
+        default_destination {
+            deliver_to &remote_queue
+        }
       }
 
       submission tls://0.0.0.0:465 tcp://0.0.0.0:587 {
@@ -172,4 +201,29 @@ in
       }
   '';
   };
+
+  users.users.mlmmj = {
+    isSystemUser = true;
+    home = "/var/lib/mlmmj";
+    createHome = true;
+    homeMode = "770";
+    group = "maddy";
+  };
+
+  systemd.services.maddy.serviceConfig.ReadWritePaths = [ "/var/lib/maddy" "/var/lib/mlmmj" ];
+
+    systemd.services.mlmmj-maintd = {
+      description = "mlmmj maintenance daemon";
+      serviceConfig = {
+        User = "mlmmj";
+        Group = "maddy";
+        ExecStart = "${pkgs.mlmmj}/bin/mlmmj-maintd -F -d /var/lib/mlmmj";
+      };
+    };
+
+    systemd.timers.mlmmj-maintd = {
+      description = "mlmmj maintenance timer";
+      timerConfig.OnUnitActiveSec = "1min";
+      wantedBy = [ "timers.target" ];
+    };
 }
