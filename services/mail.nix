@@ -19,6 +19,10 @@ let
     buildInputs = [ pkgs.openssl ];
     nativeBuildInputs = [ pkgs.pkg-config ];
     nativeCheckInputs = [ pkgs.openssh pkgs.sqlite ];
+
+    patches = [
+      ./0001-mailpot.filters-do-not-break-dkim-signatures.patch
+    ];
   };
 
   mailpotConf = pkgs.writeText "mailpot.toml" ''
