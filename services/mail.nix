@@ -181,4 +181,16 @@ in
       }
   '';
   };
+
+  # FIXME: temp
+  environment.systemPackages = [ pkgs.sqlite ];
+  users.users.mailpot = {
+    isSystemUser = true;
+    home = "/var/lib/mailpot";
+    createHome = true;
+    homeMode = "770";
+    group = "maddy";
+  };
+
+  systemd.services.maddy.serviceConfig.ReadWritePaths = [ "/var/lib/maddy" "/var/lib/mailpot" ];
 }
