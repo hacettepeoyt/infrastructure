@@ -25,7 +25,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  networking.hostName = "hacettepeoyt-vflower";
+  networking.hostName = "vflower";
   networking.enableIPv6 = true;
   networking.useDHCP = true;
   networking.domain = "";
