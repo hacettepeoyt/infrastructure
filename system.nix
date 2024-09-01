@@ -289,14 +289,6 @@
 
   nixpkgs.overlays = [
     ( final: prev: {
-        # FIXME: Drop this when 9.8 hits nixos-unstable (https://nixpk.gs/pr-tracker.html?pr=323753)
-        openssh = prev.openssh.overrideAttrs (finalAttrs: previousAttrs: rec {
-          version = "9.8p1";
-          src = prev.fetchurl {
-            url = "mirror://openbsd/OpenSSH/portable/openssh-${version}.tar.gz";
-            hash = "sha256-3YvQAqN5tdSZ37BQ3R+pr4Ap6ARh9LtsUjxJlz9aOfM=";
-          };
-        });
         papermc = prev.papermc.overrideAttrs (finalAttrs: previousAttrs: {
           version = "1.20.2.234";
 
