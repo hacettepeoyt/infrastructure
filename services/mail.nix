@@ -210,5 +210,48 @@ in
     group = "maddy";
   };
 
+  systemd.services.mpot-flush-queue = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    startLimitBurst = 3;
+    startLimitIntervalSec = 60;
+
+    serviceConfig = {
+      ExecStart = "${pkgs.mailpot}/bin/mpot -c ${mailpotConf} flush-queue";
+
+      User = "mailpot";
+      Group = "maddy";
+      Type = "oneshot";
+
+      LockPersonality = true;
+      PrivateDevices = true;
+      PrivateTmp = true;
+      PrivateUsers = true;
+      ProtectClock = true;
+      ProtectControlGroups = true;
+      ProtectHome = true;
+      ProtectHostname = true;
+      ProtectKernelLogs = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectProc = "invisible";
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      SystemCallArchitectures = "native";
+      UMask = "0007";
+    };
+  };
+
+  systemd.timers.mpot-flush-queue = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "minutely";
+      Persistent = true;
+      Unit = "mpot-flush-queue.service";
+    };
+  };
+
   systemd.services.maddy.serviceConfig.ReadWritePaths = [ "/var/lib/maddy" "/var/lib/mailpot" ];
 }
