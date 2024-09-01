@@ -32,6 +32,9 @@
   networking.firewall.allowedTCPPorts = [ 80 443 25565 ];
   networking.firewall.allowedUDPPorts = [ 19132 ];
 
+  security.pam.sshAgentAuth.enable = true;
+  security.pam.services.sudo.sshAgentAuth = true;
+
   programs.mosh.enable = true;
   programs.zsh.enable = true;
 
