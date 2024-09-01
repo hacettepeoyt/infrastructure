@@ -169,13 +169,6 @@
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6fYwAAYEKncSRGjh+xVE8toRB4ztmBFDFX2wShZAPw'' ];
     };
 
-    LinoxGH = {
-      isNormalUser = true;
-      hashedPasswordFile = config.age.secrets.passwd-LinoxGH.path;
-      extraGroups = [ "minecraft" ];
-      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICqibdeU7gLufY1Hs2AG9V1KjbhSDTM1C1Q6zRrB1h5D'' ];
-    };
-
     f1nch = {
       isNormalUser = true;
       hashedPasswordFile = config.age.secrets.passwd-f1nch.path;
