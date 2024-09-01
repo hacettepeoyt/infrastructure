@@ -26,7 +26,6 @@
   age.secrets = {
     hu-cafeteria-bot = {
       file = ../secrets/services/hu-cafeteria-bot.age;
-      owner = "hu-cafeteria-bot";
     };
     hu-cafeteria-bot-email = {
       file = ../secrets/services/hu-cafeteria-bot-email.age;
