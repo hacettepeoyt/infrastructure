@@ -83,6 +83,24 @@
         "type": "github"
       }
     },
+    "mailpot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1725237417,
+        "narHash": "sha256-cDkllOO9oLAX/IPPjY+dzT4zR1s0KMdSp4Rw3ok/ZFg=",
+        "owner": "div72",
+        "repo": "mailpot",
+        "rev": "d5d0ea2d06d02492d40715e1b8e4011ffcf3f2bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "div72",
+        "repo": "mailpot",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1703013332,
@@ -116,6 +134,21 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1725151913,
+        "narHash": "sha256-EkY43zIALfs4z8LoVOdb+Hlt5Z36dC9/YcKH23tBKdM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5fcbdb939dcdf26e2262b74607c2676dbcedc961",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1725103162,
         "narHash": "sha256-Ym04C5+qovuQDYL/rKWSR+WESseQBbNAe5DsXNx5trY=",
         "owner": "NixOS",
@@ -134,7 +167,8 @@
       "inputs": {
         "agenix": "agenix",
         "hu-cafeteria-bot": "hu-cafeteria-bot",
-        "nixpkgs": "nixpkgs_3"
+        "mailpot": "mailpot",
+        "nixpkgs": "nixpkgs_4"
       }
     },
     "systems": {
