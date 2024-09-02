@@ -16,8 +16,7 @@
       SMTP_HOST = "ozguryazilimhacettepe.com";
       SMTP_USERNAME = "hucafeteriabot@ozguryazilimhacettepe.com";
       SMTP_PASSWORD = "$SMTP_PASSWORD";
-      # TODO: Make an actual mailing list.
-      MAILING_LIST_ADDRESS = "hucafeteriabot@div72.xyz";
+      MAILING_LIST_ADDRESS = "hacettepe-cafeteria@lists.tlkg.org.tr";
     };
   };
 
