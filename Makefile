@@ -8,6 +8,7 @@ help:
 
 .PHONY: deploy
 deploy:
+	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "sudo chmod -R g+w /etc/nixos"
 	git pull server main
 	git push server main
 	@# Check if current branch is rebased to main. This can cause a rollback of changes otherwise.
