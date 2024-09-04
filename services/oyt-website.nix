@@ -66,6 +66,7 @@ in
     };
 
     serviceConfig = {
+      ExecStartPre = "${python}/bin/python oytwebsite/manage.py migrate";
       ExecStart = "${python}/bin/python oytwebsite/manage.py runserver";
 
       Restart = "always";
