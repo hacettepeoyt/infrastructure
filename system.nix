@@ -86,17 +86,6 @@
       };
     };
 
-    virtualHosts."huannouncementbot.ozguryazilimhacettepe.com" = {
-      forceSSL = true;
-      enableACME = true;
-
-      locations = {
-        "/" = {
-          proxyPass = "http://localhost:51966";
-        };
-      };
-    };
-
     virtualHosts."status.ozguryazilimhacettepe.com" = {
       forceSSL = true;
       enableACME = true;
@@ -105,10 +94,6 @@
   };
 
   age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users))) // {
-    hu-announcement-bot = {
-      file = secrets/services/hu-announcement-bot.age;
-      owner = "hu-announcement-bot";
-    };
     oyt-website = {
       file = secrets/services/oyt-website.age;
       owner = "oyt-website";
