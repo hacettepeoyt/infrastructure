@@ -34,6 +34,32 @@
   networking.firewall.allowedTCPPorts = [ 80 443 25565 ];
   networking.firewall.allowedUDPPorts = [ 19132 ];
 
+  # TODO: initialize ipsum on firewall start
+  systemd.services.update-ipsum = let
+    updateScript = pkgs.writeScriptBin "update-ipsum" ''
+        #!${pkgs.bash}/bin/bash
+
+        set -eou pipefail
+
+        echo "create ipsum-new hash:net family inet hashsize 131072" > /tmp/ipsum.txt
+        curl -fsSL https://github.com/stamparm/ipsum/raw/master/ipsum.txt | grep -oE "[0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}[.][0-9]{1,3}" | sed 's/^/add ipsum-new /g' >> /tmp/ipsum.txt
+
+        ${pkgs.ipset}/bin/ipset destroy ipsum-new || true
+        ${pkgs.ipset}/bin/ipset restore < ipsum.txt
+        ${pkgs.ipset}/bin/ipset swap ipsum-new ipsum
+'';
+  in
+  {
+    enable = true;
+    after = [ "network-online.target" ];
+    startLimitBurst = 3;
+    startLimitIntervalSec = 60;
+
+    serviceConfig = {
+        ExecStart = "";
+    };
+  };
+
   security.pam.sshAgentAuth.enable = true;
   security.pam.services.sudo.sshAgentAuth = true;
 
