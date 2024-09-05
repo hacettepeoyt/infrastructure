@@ -65,9 +65,27 @@
         "type": "github"
       }
     },
-    "hu-cafeteria-bot": {
+    "hu-announcement-bot": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1725496358,
+        "narHash": "sha256-Q1u9fatLvlrbhWa7IZEj5IBRF/6GujlyoX24OOCxt/E=",
+        "owner": "hacettepeoyt",
+        "repo": "hu-announcement-bot",
+        "rev": "ea7ab39dab3eb152b6fa0503d364accf63ec4937",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hacettepeoyt",
+        "repo": "hu-announcement-bot",
+        "type": "github"
+      }
+    },
+    "hu-cafeteria-bot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1724080196,
@@ -85,7 +103,7 @@
     },
     "mailpot": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1725237417,
@@ -119,6 +137,21 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1725108434,
+        "narHash": "sha256-wp8BmhOjKIUXx9TyTCrdP/Se1Ts29KlG9jV3LjT3po4=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8863a9ab2ac6870d569af0cd0be72767ed940ff7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1723673859,
         "narHash": "sha256-FLYl6raDlRSUf6o3DkbCg/KkOUBGHcyNKZ0RlzoSLcA=",
         "owner": "nixos",
@@ -132,7 +165,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1725151913,
         "narHash": "sha256-EkY43zIALfs4z8LoVOdb+Hlt5Z36dC9/YcKH23tBKdM=",
@@ -147,7 +180,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1725103162,
         "narHash": "sha256-Ym04C5+qovuQDYL/rKWSR+WESseQBbNAe5DsXNx5trY=",
@@ -166,9 +199,10 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "hu-announcement-bot": "hu-announcement-bot",
         "hu-cafeteria-bot": "hu-cafeteria-bot",
         "mailpot": "mailpot",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       }
     },
     "systems": {
