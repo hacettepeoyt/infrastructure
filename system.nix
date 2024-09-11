@@ -8,6 +8,7 @@
     services/mail.nix
     services/minecraft.nix
     services/oyt-website.nix
+    website/website.nix
   ];
 
   system.stateVersion = "23.05";
