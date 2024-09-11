@@ -1,0 +1,68 @@
+:root {
+    --box-background: #a8a8a8;
+    --global-background: #00a8a8;
+}
+
+.column-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.row-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.spacer {
+    flex-grow: 99;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+
+    background-color: var(--global-background);
+    color: black;
+    font-size: 14px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5vh;
+    margin: 5vh 2vw;
+}
+
+footer {
+    margin-top: auto;
+}
+
+nav, footer {
+    width: 100%;
+    background-color: var(--box-background);
+}
+
+section {
+    width: fit-content;
+    height: fit-content;
+
+    background-color: var(--box-background);
+    box-shadow: black 0.7cqw 1.2cqh;
+}
+
+a {
+    color: inherit;
+}
+
+a:hover, a:focus {
+    color: var(--box-background);
+    background-color: black;
+}
+
+pre {
+    margin: 0;
+}
+
