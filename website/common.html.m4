@@ -1,7 +1,7 @@
 m4_changequote([, ])
 m4_changecom(/*, */)
 
-m4_ifelse(MOBILE, 1, [m4_define(WIDTH, 45)], [m4_define(WIDTH, 100)])
+m4_ifelse(MOBILE, 1, [m4_define(WIDTH, 43)], [m4_define(WIDTH, 100)])
 
 <!-- TODO: Nix is acting up, explicitly calling bash should not be necessary here. --->
 m4_define(SECTION, [
@@ -19,7 +19,18 @@ m4_define(WEB_PAGE, [
     <head>
         <meta charset="utf-8">
         <title>TLKG - your local linux user group</title>
-        m4_ifelse(MOBILE, 1, [<meta name="viewport" content="width=device-width, initial-scale=1" />])
+        m4_ifelse(MOBILE, 1, [
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            pre {
+                font-size: 12px !important;
+            }
+
+            main {
+                justify-content: center;
+            }
+        </style>
+        ])
         <link rel="stylesheet" type="text/css" href="WEB_ROOT/style.css" />
     </head>
     <body class="row-container">
@@ -33,7 +44,7 @@ m4_define(WEB_PAGE, [
         </main>
         <footer class="column-container">
 <pre>
-  funny copyright thingy goes here
+  funny copyright thingy m4_ifelse(MOBILE, 1, [], [goes here])
 </pre>
 <div class="spacer"></div>
 <pre>
