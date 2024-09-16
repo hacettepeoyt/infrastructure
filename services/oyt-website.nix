@@ -37,7 +37,7 @@ in
 
     locations = {
       "/" = {
-        proxyPass = "http://localhost:8000";
+        proxyPass = "http://localhost:31416";
       };
 
       "/static" = {
