@@ -14,7 +14,7 @@ deploy:
 	@# Check if current branch is rebased to main. This can cause a rollback of changes otherwise.
 	@git branch --contains $$(git log --format=format:%H -1 main) | grep -q $$(git rev-parse --abbrev-ref HEAD) \
 	|| (echo "ERROR: Branch is not rebased to master, please rebase." && exit 1)
-	git push server
+	git push --force-with-lease server
 	@# Agent forwarding allows using sudo using the local agent.
 	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "cd /etc/nixos && git checkout $$(git rev-parse --abbrev-ref HEAD) && sudo nixos-rebuild switch"
 
