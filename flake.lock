@@ -88,11 +88,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1727384908,
-        "narHash": "sha256-wXzZRdaIxWvJA+n4NmgEsLqIfnATOXQgu588SYJvNmo=",
+        "lastModified": 1727385496,
+        "narHash": "sha256-ZP2OYiLP11bWU09RxsoFLH3nz6JNChTFrMBR2xq7dPs=",
         "owner": "hacettepeoyt",
         "repo": "hu-cafeteria-bot",
-        "rev": "69604cf8d013584f87967378e39709a6f1051edf",
+        "rev": "0e4887ca212427e4172ba9838289d0e8b93085a6",
         "type": "github"
       },
       "original": {
