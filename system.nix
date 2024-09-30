@@ -42,6 +42,7 @@
   programs.zsh.enable = true;
 
   services.openssh.enable = true;
+  services.openssh.settings.GatewayPorts = "yes";
   services.fail2ban.enable = true;
 
   virtualisation.docker.enable = true;
