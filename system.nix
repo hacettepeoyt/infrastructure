@@ -197,9 +197,16 @@
       group = "statie";
       packages = [ pkgs.gnuplot ];
     };
+
+    automata = {
+      isSystemUser = true;
+      group = "automata";
+      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAee49tO2W172hMqjiUxIYP7IGNVhwWQt1N8kk/w13WA'' ];
+    };
   };
 
   users.groups.statie = { };
+  users.groups.automata = { };
 
   services.cron = {
     enable = true;
