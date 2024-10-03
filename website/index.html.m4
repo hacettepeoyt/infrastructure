@@ -21,6 +21,8 @@ SHA256:YTE7aW9ADbrxv+h5fZB8afBYAkePMRdSXfXHbhR61PY (ED25519)])
 ])
 
 SECTION([Server Log],
-[2024-09-01 - Routine server upgrade. A few minutes of downtime may occur.
+[2024-10-01 - Thanks to @f1nch for covering 3 months of server costs with their donation!
+2024-09-30 - Hosting a temporary GT New Horizons server. Ask on Matrix if you want access.
+2024-09-01 - Routine server upgrade. A few minutes of downtime may occur.
 (end of log)])
 ])
