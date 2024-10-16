@@ -9,6 +9,8 @@ let
   dmarcPolicy = ''"v=DMARC1; p=quarantine; ruf=mailto:${contactMail}"'';
 in
 {
+  networking.firewall.allowedUDPPorts = [ 53 ];
+
   services.bind = {
     enable = true;
     zones = {
