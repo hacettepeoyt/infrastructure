@@ -1,6 +1,7 @@
 { config, libs, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    ./networking.nix
 
     ./dns.nix
     services/hu-announcement-bot.nix
