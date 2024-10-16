@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
 
+    ./dns.nix
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
     services/jitsi.nix
