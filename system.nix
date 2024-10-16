@@ -18,7 +18,7 @@
   zramSwap.enable = true;
 
   # DO NOT TOUCH THIS. Otherwise after a while /boot will fill up and all hell will break loose.
-  boot.loader.grub.configurationLimit = 2;
+  boot.loader.grub.configurationLimit = 5;
   nix.gc = {
     automatic = true;
     randomizedDelaySec = "14m";
