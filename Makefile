@@ -8,14 +8,13 @@ help:
 
 .PHONY: deploy
 deploy:
-	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "sudo chmod -R g+w /etc/nixos"
-	git pull server main
-	git push server main
+	git fetch server
 	@# Check if current branch is rebased to main. This can cause a rollback of changes otherwise.
-	@git branch --contains $$(git log --format=format:%H -1 main) | grep -q $$(git rev-parse --abbrev-ref HEAD) \
+	@git branch --contains $$(git log --format=format:%H -1 server/main) | grep -q $$(git rev-parse --abbrev-ref HEAD) \
 	|| (echo "ERROR: Branch is not rebased to master, please rebase." && exit 1)
+	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "sudo chmod -R g+w /etc/nixos"
 	git push --force-with-lease server
-	@# Agent forwarding allows using sudo using the local agent.
+	@# Agent forwarding allows authenticating with sudo using the local agent.
 	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "cd /etc/nixos && git checkout $$(git rev-parse --abbrev-ref HEAD) && sudo nixos-rebuild switch"
 
 # Only use this if you have the same arch as the server!
