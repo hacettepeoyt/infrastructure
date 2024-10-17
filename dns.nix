@@ -39,6 +39,14 @@ in
           default._domainkey.lists IN TXT ${dkimTxt}
           _dmarc.lists IN TXT ${dmarcPolicy}
 
+          bots         IN      MX      10 ${mailServer}.
+                       IN      TXT     "v=spf1 mx ~all"
+          default._domainkey.bots IN TXT ${dkimTxt}
+          _dmarc.bots  IN TXT ${dmarcPolicy}
+
+          monit        IN      A       ${vflower.ipv4}
+                       IN      AAAA    ${vflower.ipv6}
+
           ns0          IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
         '';

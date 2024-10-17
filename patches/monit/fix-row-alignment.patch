@@ -1,0 +1,13 @@
+diff --git a/src/http/cervlet.c b/src/http/cervlet.c
+index 54dc425..a145f45 100644
+--- a/src/http/cervlet.c
++++ b/src/http/cervlet.c
+@@ -1478,7 +1478,7 @@ static void do_home_program(HttpResponse res) {
+                         StringBuffer_append(res->outputbuffer,
+                                             "<table id='header-row'>"
+                                             "<tr>"
+-                                            "<th class='left' class='first'>Program</th>"
++                                            "<th class='left first'>Program</th>"
+                                             "<th class='left'>Status</th>"
+                                             "<th class='left'>Output</th>"
+                                             "<th class='right'>Last started</th>"

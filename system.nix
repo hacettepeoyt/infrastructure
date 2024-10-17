@@ -9,6 +9,7 @@
     services/jitsi.nix
     services/mail.nix
     services/minecraft.nix
+    services/monit.nix
     services/oyt-website.nix
     website/website.nix
   ];
