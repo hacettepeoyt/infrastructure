@@ -3,8 +3,13 @@ HEAVY_FLAKES := github:div72/mailpot
 .PHONY: help
 help:
 	@echo "make deploy                     ---> Sends the configuration to the server."
+	@echo "make check                      ---> Checks the configuration."
 	@echo "make pre-build                  ---> Builds heavy flake inputs and copies them to the server."
 	@echo "make update-input INPUT=<input> ---> Updates a specific input and commits it."
+
+.PHONY: check
+check:
+	nix eval --raw ".#nixosConfigurations.vflower.config.system.build.toplevel.drvPath"
 
 .PHONY: deploy
 deploy:
