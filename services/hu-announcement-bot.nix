@@ -2,7 +2,7 @@
 {
   services.hu-announcement-bot = {
     enable = true;
-    hostname = "huannouncementbot.ozguryazilimhacettepe.com";
+    hostname = "huannouncementbot.tlkg.org.tr";
     environmentFile = config.age.secrets.hu-announcement-bot.path;
 
     settings = {

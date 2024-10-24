@@ -47,6 +47,12 @@ in
           monit        IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
 
+          huannouncementbot IN      A       ${vflower.ipv4}
+                            IN      AAAA    ${vflower.ipv6}
+
+          hucafeteriabot IN      A       ${vflower.ipv4}
+                         IN      AAAA    ${vflower.ipv6}
+
           ns0          IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
         '';

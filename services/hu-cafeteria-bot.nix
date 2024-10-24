@@ -2,7 +2,7 @@
 {
   services.hu-cafeteria-bot = {
     enable = true;
-    hostname = "hucafeteriabot.ozguryazilimhacettepe.com";
+    hostname = "hucafeteriabot.tlkg.org.tr";
     environmentFile = config.age.secrets.hu-cafeteria-bot.path;
 
     settings = {
