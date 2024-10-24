@@ -55,7 +55,7 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "hacettepeoyt_letsencrypt@div72.xyz";
+    defaults.email = "sysadmin@lists.tlkg.org.tr";
   };
 
   services.nginx = {
