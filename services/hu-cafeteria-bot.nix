@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  email = "hucafeteriabot@bots.tlkg.org.tr";
+in
 {
   services.hu-cafeteria-bot = {
     enable = true;
@@ -13,14 +16,14 @@
       TEXT_CHANNEL_ID = -1001815648235;
       LOGGER_CHAT_ID = -874312282;
 
-      SMTP_HOST = "ozguryazilimhacettepe.com";
-      SMTP_USERNAME = "hucafeteriabot@ozguryazilimhacettepe.com";
+      SMTP_HOST = "mail.tlkg.org.tr";
+      SMTP_USERNAME = email;
       SMTP_PASSWORD = "$SMTP_PASSWORD";
       MAILING_LIST_ADDRESS = "hacettepe-cafeteria@lists.tlkg.org.tr";
     };
   };
 
-  services.maddy.ensureCredentials."hucafeteriabot@ozguryazilimhacettepe.com".passwordFile = config.age.secrets.hu-cafeteria-bot-email.path;
+  services.maddy.ensureCredentials."${email}".passwordFile = config.age.secrets.hu-cafeteria-bot-email.path;
 
   age.secrets = {
     hu-cafeteria-bot = {
