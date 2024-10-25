@@ -6,7 +6,6 @@
     ./dns.nix
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
-    services/jitsi.nix
     services/mail.nix
     services/minecraft.nix
     services/monit.nix
