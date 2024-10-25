@@ -1,7 +1,7 @@
 { config, options, pkgs, ... }:
 
 let
-  domain = "mail.ozguryazilimhacettepe.com";
+  domain = "mail.tlkg.org.tr";
 
   mailpotConf = pkgs.writeText "mailpot.toml" ''
     db_path = "/var/lib/mailpot/mailpot.sqlite"
@@ -36,8 +36,8 @@ in
     };
 
     hostname = domain;
-    primaryDomain = "ozguryazilimhacettepe.com";
-    localDomains = [ "ozguryazilimhacettepe.com" "lists.tlkg.org.tr" ];
+    primaryDomain = "tlkg.org.tr";
+    localDomains = [ "ozguryazilimhacettepe.com" "tlkg.org.tr" "bots.tlkg.org.tr" "lists.tlkg.org.tr" ];
     config = ''
       auth.pass_table local_authdb {
           table sql_table {
