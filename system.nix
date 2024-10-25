@@ -53,6 +53,7 @@
   };
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
 
   security.acme = {
     acceptTerms = true;
