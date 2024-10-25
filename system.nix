@@ -88,12 +88,6 @@
         };
       };
     };
-
-    virtualHosts."status.ozguryazilimhacettepe.com" = {
-      forceSSL = true;
-      enableACME = true;
-      root = "/var/lib/statie";
-    };
   };
 
   age.secrets = builtins.listToAttrs (map (user: { name = "passwd-${user}"; value = { file = ./secrets/passwd/${user}.age; }; }) (builtins.filter (user: config.users.users."${user}".isNormalUser) (builtins.attrNames config.users.users))) // {
@@ -190,15 +184,6 @@
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKjtQ/SbNBCTSWimPetOw4veFxXANwPNdprjFiEQa2O'' ];
     };
 
-    statie = {
-      isSystemUser = true;
-      home = "/var/lib/statie";
-      createHome = true;
-      homeMode = "755";
-      group = "statie";
-      packages = [ pkgs.gnuplot ];
-    };
-
     automata = {
       isSystemUser = true;
       group = "automata";
@@ -206,15 +191,7 @@
     };
   };
 
-  users.groups.statie = { };
   users.groups.automata = { };
-
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      "*/15 * * * *      statie    /var/lib/statie/hacettepeoyt.sh > /var/lib/statie/index.html 2> /var/lib/statie/error.log"
-    ];
-  };
 
   environment.systemPackages = [ pkgs.gnuplot ];
 }
