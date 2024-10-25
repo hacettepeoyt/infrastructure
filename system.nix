@@ -52,6 +52,8 @@
     setSocketVariable = true;
   };
 
+  virtualisation.libvirtd.enable = true;
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "sysadmin@lists.tlkg.org.tr";
@@ -102,7 +104,7 @@
       isNormalUser = true;
       hashedPasswordFile = config.age.secrets.passwd-div72.path;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "libvirtd" ];
       packages = [ ]; # packages managed by home-manager
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICVb2l/23ykDnfhO5VrkCQaycfF9oCo1Jig/JeG86w//'' ];
     };
