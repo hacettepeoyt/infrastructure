@@ -17,15 +17,15 @@ deploy:
 	@# Check if current branch is rebased to main. This can cause a rollback of changes otherwise.
 	@git branch --contains $$(git log --format=format:%H -1 server/main) | grep -q $$(git rev-parse --abbrev-ref HEAD) \
 	|| (echo "ERROR: Branch is not rebased to master, please rebase." && exit 1)
-	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "sudo chmod -R g+w /etc/nixos"
+	ssh -tt -A $(USER)@tlkg.org.tr "sudo chmod -R g+w /etc/nixos"
 	git push --force-with-lease server
 	@# Agent forwarding allows authenticating with sudo using the local agent.
-	ssh -tt -A $(USER)@ozguryazilimhacettepe.com "cd /etc/nixos && git checkout $$(git rev-parse --abbrev-ref HEAD) && sudo nixos-rebuild switch"
+	ssh -tt -A $(USER)@tlkg.org.tr "cd /etc/nixos && git checkout $$(git rev-parse --abbrev-ref HEAD) && sudo nixos-rebuild switch"
 
 # Only use this if you have the same arch as the server!
 .PHONY: pre-build
 pre-build:
-	nix-copy-closure --to --gzip --use-substitutes $(USER)@ozguryazilimhacettepe.com $$(nix build --refresh --quiet --no-link --print-out-paths $(HEAVY_FLAKES))
+	nix-copy-closure --to --gzip --use-substitutes $(USER)@tlkg.org.tr $$(nix build --refresh --quiet --no-link --print-out-paths $(HEAVY_FLAKES))
 
 .PHONY: update-input
 update-input:
