@@ -33,7 +33,7 @@
   networking.hostName = "vflower";
   networking.domain = "";
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [ 80 443 25565 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 10022 25565 ];
   networking.firewall.allowedUDPPorts = [ 19132 ];
 
   security.pam.sshAgentAuth.enable = true;
@@ -194,4 +194,20 @@
   users.groups.automata = { };
 
   environment.systemPackages = [ pkgs.gnuplot ];
+
+  networking.nat = {
+    enable = true;
+    externalInterface = "eth0";
+    internalInterfaces = [ "tailscale0" ];
+    extraCommands = ''
+      iptables -t nat -A POSTROUTING -d 100.64.0.1 -p tcp -m tcp --dport 10022 -j MASQUERADE
+    '';
+    /*forwardPorts = [
+      {
+        destination = "100.64.0.1:22";
+        proto = "tcp";
+        sourcePort = 10022;
+      }
+    ];*/
+  };
 }
