@@ -47,6 +47,9 @@ in
           default._domainkey.bots IN TXT ${dkimTxt}
           _dmarc.bots  IN TXT ${dmarcPolicy}
 
+          headscale    IN      A       ${vflower.ipv4}
+                       IN      AAAA    ${vflower.ipv6}
+
           monit        IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
 
