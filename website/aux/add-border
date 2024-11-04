@@ -2,8 +2,11 @@
 
 title="$1"
 title_len="${#title}"
-text=$(cat)
-longest_line_len=$(wc -L <<< "$text")
+text_file=$(mktemp)
+
+cat > "$text_file"
+
+longest_line_len=$(sed -E 's/<[/]?[a-z]+>//g' < "$text_file" | wc -L)
 
 total_mid_len=$(($longest_line_len - $title_len - 2))
 left_mid_len=$(($total_mid_len / 2))
@@ -19,7 +22,7 @@ if [[ "$MOBILE" == 1 ]]; then
 
 printf "+%s| %s |%s+\n" "$(repeat "-" $left_mid_len)" "$title" "$(repeat "-" $right_mid_len)"
 
-xargs -d $'\n' -I{} printf "| %-${longest_line_len}s |\n" "{}" <<< "$text"
+xargs -d $'\n' -I{} printf "| %-${longest_line_len}s |\n" "{}" < "$text_file"
 
 printf "+%s+" "$(repeat "-" $(($longest_line_len + 2)))"
 
@@ -27,8 +30,10 @@ else
 
 printf "╔%s╣ %s ╠%s╗\n" "$(repeat "═" $left_mid_len)" "$title" "$(repeat "═" $right_mid_len)"
 
-xargs -d $'\n' -I{} printf "║ %-${longest_line_len}s ║\n" "{}" <<< "$text"
+xargs -d $'\n' -I{} printf "║ %-${longest_line_len}s ║\n" "{}" < "$text_file"
 
 printf "╚%s╝" "$(repeat "═" $(($longest_line_len + 2)))"
 
 fi
+
+rm "$text_file"

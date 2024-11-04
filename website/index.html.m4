@@ -3,9 +3,9 @@ m4_include(common.html.m4)
 WEB_PAGE([
 SECTION([SSS],
 [> Siz kimsiniz?
-Türkiye bazlı bir Linux kullanıcı grubuyuz. Matrix'te takılıp <i>cool</i> yazılımlar hostluyoruz.
+Turkiye bazli bir Linux kullanici grubuyuz. Matrix'te takilip <i>cool</i> yazilimlar hostluyoruz.
 
-> Size katılabilir miyim?
+> Size katilabilir miyim?
 Matrix'e bekleriz. Footer'da link mevcut.])
 
 m4_ifelse(MOBILE, 1, [], [
@@ -16,9 +16,9 @@ SHA256:YTE7aW9ADbrxv+h5fZB8afBYAkePMRdSXfXHbhR61PY (ED25519)])
 ])
 
 SECTION([Sunucu Logu],
-[2024-10-03 - @ikolomiko'ya 2 aylık sunucu masrafını karşıladığı için teşekkür ederiz!
-2024-10-01 - @f1nch'e 3 aylık sunucu masrafını karşıladığı için teşekkür ederiz!
-2024-09-30 - Geçici süreliğine GT New Horizons sunucusu hostlayacağız. Erişim için Matrix'den yazın.
-2024-09-01 - Bugün sunucu güncellemesi yapılacak. Birkaç dakikalık erişim sıkıntısı olabilir.
+[2024-10-03 - @ikolomiko'ya 2 aylik sunucu masrafini karsiladigi icin tesekkur ederiz!
+2024-10-01 - @f1nch'e 3 aylik sunucu masrafini karsiladigi icin tesekkur ederiz!
+2024-09-30 - Gecici sureligine GT New Horizons sunucusu hostlayacagiz. Erisim icin Matrix'den yazin.
+2024-09-01 - Bugun sunucu guncellemesi yapilacak. Birkac dakikalik erisim sikintisi olabilir.
 (log sonu)])
 ])
