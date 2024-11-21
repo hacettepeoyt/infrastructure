@@ -3,6 +3,7 @@
     enable = true;
     settings.global = {
       server_name = "tlkg.org.tr";
+      log = "debug";
     };
   };
 
