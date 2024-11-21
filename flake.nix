@@ -21,7 +21,9 @@
     };
   };
 
-  outputs = { self, agenix, hu-announcement-bot, hu-cafeteria-bot, mailpot, nixpkgs }: {
+  outputs = inputs @ { self, agenix, hu-announcement-bot, hu-cafeteria-bot, mailpot, nixpkgs }: {
+    inherit inputs;
+
     nixosConfigurations."vflower" = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [

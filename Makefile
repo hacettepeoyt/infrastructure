@@ -1,4 +1,4 @@
-HEAVY_FLAKES := github:div72/mailpot nixpkgs\#olm
+HEAVY_FLAKES := .\#inputs.mailpot.outputs.packages.aarch64-linux.default .\#inputs.nixpkgs.outputs.legacyPackages.aarch64-linux.olm
 
 .PHONY: help
 help:
