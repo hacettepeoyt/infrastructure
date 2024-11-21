@@ -8,7 +8,10 @@ in
   services.headscale = {
     enable = true;
     port = 34321;
-    settings.server_url = "https://${domain}";
+    settings = {
+      server_url = "https://${domain}";
+      dns.base_domain = "tailnet.tlkg.org.tr";
+    };
   };
 
   services.nginx.virtualHosts."${domain}" = {
