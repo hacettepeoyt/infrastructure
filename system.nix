@@ -8,6 +8,7 @@
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
     services/mail.nix
+    services/matrix.nix
     services/minecraft.nix
     services/monit.nix
     services/oyt-website.nix
