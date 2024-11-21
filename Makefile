@@ -1,4 +1,4 @@
-HEAVY_FLAKES := github:div72/mailpot
+HEAVY_FLAKES := github:div72/mailpot nixpkgs\#olm
 
 .PHONY: help
 help:
@@ -25,7 +25,7 @@ deploy:
 # Only use this if you have the same arch as the server!
 .PHONY: pre-build
 pre-build:
-	nix-copy-closure --to --gzip --use-substitutes $(USER)@tlkg.org.tr $$(nix build --refresh --quiet --no-link --print-out-paths $(HEAVY_FLAKES))
+	nix-copy-closure --to --gzip --use-substitutes $(USER)@tlkg.org.tr $$(NIXPKGS_ALLOW_INSECURE=1 nix build --impure --refresh --quiet --no-link --print-out-paths --inputs-from . $(HEAVY_FLAKES))
 
 .PHONY: update-input
 update-input:
