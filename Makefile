@@ -31,4 +31,4 @@ pre-build:
 update-input:
 	@nix eval --file flake.nix --apply "inputs: inputs ? $(INPUT)" inputs 2>/dev/null | grep -q true \
 	|| (echo "ERROR: Missing input: $(INPUT)" && exit 1)
-	nix flake lock --update-input $(INPUT) --commit-lock-file
+	nix flake update $(INPUT) --commit-lock-file
