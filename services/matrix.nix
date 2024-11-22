@@ -1,9 +1,11 @@
-{ config, ... }: {
+{ config, pkgs, ... }: {
   services.matrix-conduit = {
     enable = true;
+    package = pkgs.conduwuit2;
+
     settings.global = {
       server_name = "tlkg.org.tr";
-      log = "debug";
+      database_backend = "rocksdb";
     };
   };
 
@@ -11,6 +13,11 @@
 
   services.nginx.virtualHosts."tlkg.org.tr" = {
     locations."/_matrix/" = {
+      proxyPass = "http://localhost:${toString config.services.matrix-conduit.settings.global.port}";
+      recommendedProxySettings = true;
+    };
+
+    locations."/_synapse/" = {
       proxyPass = "http://localhost:${toString config.services.matrix-conduit.settings.global.port}";
       recommendedProxySettings = true;
     };
