@@ -12,7 +12,7 @@
     services/minecraft.nix
     services/monit.nix
     services/oyt-website.nix
-    website/website.nix
+    services/tlkg-website.nix
   ];
 
   system.stateVersion = "23.05";
