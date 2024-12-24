@@ -11,6 +11,7 @@
     services/matrix.nix
     services/minecraft.nix
     services/monit.nix
+    services/murmur.nix
     services/oyt-website.nix
     services/tlkg-website.nix
   ];

@@ -59,6 +59,9 @@ in
           hucafeteriabot IN      A       ${vflower.ipv4}
                          IN      AAAA    ${vflower.ipv6}
 
+          mumble       IN      A       ${vflower.ipv4}
+                       IN      AAAA    ${vflower.ipv6}
+
           ns0          IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
         '';
