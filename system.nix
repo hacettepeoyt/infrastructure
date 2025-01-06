@@ -33,7 +33,6 @@
   nix.settings.trusted-users = [ "@wheel" ];
 
   networking.hostName = "vflower";
-  networking.domain = "";
   networking.firewall.enable = true;
   networking.firewall.allowedTCPPorts = [ 80 443 10022 25565 ];
   networking.firewall.allowedUDPPorts = [ 19132 ];
