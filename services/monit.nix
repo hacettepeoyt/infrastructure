@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   monitPort = "2812";
   checkSystemdUnits = pkgs.writeShellScript "check_systemd_units" ''
@@ -15,10 +15,31 @@ in
     locations."/".proxyPass = "http://localhost:${monitPort}";
   };
 
+  # 2025-06-01: Monit runs as root without this as the default configuration.
+  systemd.services.monit.serviceConfig = {
+    User = "monit";
+    Group = "monit";
+    RuntimeDirectory = "monit";
+  };
+
+  environment.etc.monitrc.user = "monit";
+
+  users.groups.monit = {};
+  users.users.monit = {
+    isSystemUser = true;
+    group = "monit";
+    home = "/var/lib/monit";
+    createHome = true;
+  };
+
   services.monit = {
     enable = true;
     config = ''
       set daemon 60
+      set idfile /run/monit/monit.id
+      set pidfile /run/monit/monit.pid
+      set statefile /var/lib/monit/monit.state
+
       set httpd port ${monitPort}
         read-only
         allow localhost
