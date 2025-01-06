@@ -40,6 +40,10 @@ in
       set pidfile /run/monit/monit.pid
       set statefile /var/lib/monit/monit.state
 
+      set httpd unixsocket /run/monit/monit.sock
+        gid monit
+        permission 0660
+
       set httpd port ${monitPort}
         read-only
         allow localhost
