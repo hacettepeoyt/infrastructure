@@ -47,13 +47,6 @@
   services.openssh.settings.GatewayPorts = "yes";
   services.fail2ban.enable = true;
 
-  virtualisation.docker.enable = true;
-
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults.email = "sysadmin@lists.tlkg.org.tr";
@@ -66,28 +59,6 @@
       forceSSL = true;
       enableACME = true;
       root = "/srv/http/wiki.ozguryazilimhacettepe.com";
-    };
-
-    virtualHosts."intin.com.tr" = {
-      forceSSL = true;
-      enableACME = true;
-
-      locations = {
-        "/" = {
-          proxyPass = "http://localhost:8282";
-        };
-      };
-    };
-
-    virtualHosts."api.intin.com.tr" = {
-      forceSSL = true;
-      enableACME = true;
-
-      locations = {
-        "/" = {
-          proxyPass = "http://localhost:8383";
-        };
-      };
     };
   };
 
@@ -113,7 +84,7 @@
       isNormalUser = true;
       hashedPasswordFile = config.age.secrets.passwd-ikolomiko.path;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "docker" ];
+      extraGroups = [ "wheel" ];
       packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop pkgs.ncdu ];
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ6fYwAAYEKncSRGjh+xVE8toRB4ztmBFDFX2wShZAPw'' ];
     };

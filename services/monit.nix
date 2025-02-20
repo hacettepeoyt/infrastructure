@@ -79,12 +79,6 @@ in
         then alert
         alert formie-status@div72.xyz
 
-      check host intin address intin.com.tr
-        if failed
-          port 443
-          protocol https
-        then alert
-
       check host oytwebsite address ozguryazilimhacettepe.com
         if failed
           port 443
