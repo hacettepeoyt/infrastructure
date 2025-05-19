@@ -20,6 +20,7 @@
       --property=PrivateNetwork=yes \
       --property=PrivateTmp=yes \
       --property=WorkingDirectory=/tmp \
+      --property=ReadWriteDirectories=/var/lib/chat \
       "$@"
   '';
 
