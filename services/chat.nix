@@ -27,12 +27,21 @@
 
     cd /var/lib/chat
     CHAT_FILE="$1"
+    SCREEN_CONF=$(mktemp)
 
     trap "exit" INT TERM
-    trap "kill 0" EXIT
+    trap "rm -f $SCREEN_CONF; kill 0" EXIT
 
-    ${lib.getExe pkgs.tmux} new-session "${chatRead} $CHAT_FILE" \; \
-                            split-window -p 20 -v "${chatWrite} $CHAT_FILE"  
+
+    cat > "$SCREEN_CONF" <<EOF
+    screen 1 ${chatRead} $CHAT_FILE
+    split -h
+    focus down
+    screen 2 ${chatWrite} $CHAT_FILE
+    resize 20%
+    EOF
+
+    ${lib.getExe pkgs.screen} -c "$SCREEN_CONF"
   '';
 in
 {
