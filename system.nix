@@ -4,6 +4,7 @@
     ./networking.nix
 
     ./dns.nix
+    services/faceless.nix
     services/headscale.nix
     services/hu-announcement-bot.nix
     services/hu-cafeteria-bot.nix
