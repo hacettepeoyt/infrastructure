@@ -1,4 +1,4 @@
-{ pkgs, ... }: let
+{ lib, pkgs, ... }: let
   pythonEnv = pkgs.python3.withPackages (pp: [ pp.requests ]);
 
   systemdRunWrapper = pkgs.writeShellScript "faceless_systemd_run" ''
@@ -21,7 +21,7 @@
       --property=PrivateTmp=yes \
       --property=WorkingDirectory=/tmp \
       --property=ReadWriteDirectories=/var/lib/chat \
-      "$@"
+      ${lib.getExe pkgs.bashInteractive} "$@"
   '';
 
   facelessMain = pkgs.writeScript "faceless" ''
