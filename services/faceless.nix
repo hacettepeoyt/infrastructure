@@ -22,7 +22,7 @@
       --property=PrivateTmp=yes \
       --property=WorkingDirectory=/tmp \
       --property=ReadWriteDirectories=/var/lib/chat \
-      /usr/bin/env PATH="$PATH" "$@"
+      /usr/bin/env PATH="$PATH" $@
   '';
 
   facelessMain = pkgs.writeScript "faceless" ''
