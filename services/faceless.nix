@@ -11,6 +11,7 @@
     fi
 
     echo "$0: Running $@"
+    echo "PATH: $PATH"
     exec ${pkgs.systemd}/bin/systemd-run --pty \
       --property=DynamicUser=yes \
       --property=User=$USER \
