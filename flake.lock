@@ -706,11 +706,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725237417,
-        "narHash": "sha256-cDkllOO9oLAX/IPPjY+dzT4zR1s0KMdSp4Rw3ok/ZFg=",
+        "lastModified": 1748705249,
+        "narHash": "sha256-koLk01F50HpOpW7q/RVw8EGaRjBVoxZH4Blq0dh/bfg=",
         "owner": "div72",
         "repo": "mailpot",
-        "rev": "d5d0ea2d06d02492d40715e1b8e4011ffcf3f2bf",
+        "rev": "d6b0961512b27a2eabd3f101f699bf3c41ae3fb2",
         "type": "github"
       },
       "original": {
@@ -1020,16 +1020,16 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1732014248,
-        "narHash": "sha256-y/MEyuJ5oBWrWAic/14LaIr/u5E0wRVzyYsouYY3W6w=",
+        "lastModified": 1748437600,
+        "narHash": "sha256-hYKMs3ilp09anGO7xzfGs3JqEgUqFMnZ8GMAqI6/k04=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
+        "rev": "7282cb574e0607e65224d33be8241eae7cfe0979",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixos-25.05",
         "repo": "nixpkgs",
         "type": "github"
       }
