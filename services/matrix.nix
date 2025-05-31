@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   services.matrix-conduit = {
     enable = true;
     package = pkgs.matrix-continuwuity;
@@ -8,6 +8,8 @@
       database_backend = "rocksdb";
     };
   };
+  # FIXME: switch to the proper nixos module.
+  systemd.services.conduit.serviceConfig.ExecStart = lib.mkForce (lib.getExe pkgs.matrix-continuwuity);
 
   networking.firewall.allowedTCPPorts = [ 8448 ];
 
