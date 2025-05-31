@@ -1,7 +1,7 @@
 { config, pkgs, ... }: {
   services.matrix-conduit = {
     enable = true;
-    package = pkgs.conduwuit2;
+    package = pkgs.matrix-continuwuity;
 
     settings.global = {
       server_name = "tlkg.org.tr";

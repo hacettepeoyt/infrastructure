@@ -1,4 +1,4 @@
-HEAVY_FLAKES := .\#inputs.mailpot.outputs.packages.aarch64-linux.default .\#inputs.nixpkgs.outputs.legacyPackages.aarch64-linux.olm .\#inputs.conduwuit.outputs.packages.aarch64-linux.static-aarch64-linux-musl
+HEAVY_FLAKES := .\#inputs.mailpot.outputs.packages.aarch64-linux.default .\#inputs.nixpkgs.outputs.legacyPackages.aarch64-linux.olm
 
 .PHONY: help
 help:
