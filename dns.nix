@@ -64,6 +64,9 @@ in
 
           ns0          IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
+
+          bitirme      IN      A       ${vflower.ipv4}
+                       IN      AAAA    ${vflower.ipv6}
         '';
       };
     };

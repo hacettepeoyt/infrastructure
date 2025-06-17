@@ -16,6 +16,7 @@
     services/murmur.nix
     services/oyt-website.nix
     services/tlkg-website.nix
+    services/bitirme-website.nix
   ];
 
   system.stateVersion = "23.05";
