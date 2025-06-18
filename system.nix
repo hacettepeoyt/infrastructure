@@ -17,6 +17,7 @@
     services/oyt-website.nix
     services/tlkg-website.nix
     services/bitirme-website.nix
+    services/ragopedia.nix
   ];
 
   system.stateVersion = "23.05";
