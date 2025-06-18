@@ -7,7 +7,9 @@ in
     forceSSL = true;
     enableACME = true;
     locations."/".proxyPass = "http://localhost:${ragopediaPort}";
+    locations."/bitirme".root = "/srv/http/ragopedia.tlkg.org.tr";
   };
+
   services.nginx.virtualHosts."ragopedia-api.tlkg.org.tr" = {
     forceSSL = true;
     enableACME = true;
