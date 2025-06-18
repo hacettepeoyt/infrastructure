@@ -81,6 +81,13 @@
       group = "automata";
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAee49tO2W172hMqjiUxIYP7IGNVhwWQt1N8kk/w13WA'' ];
     };
+
+    mudrowe = { 
+      isNormalUser = true;
+      shell = pkgs.zsh;
+      packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop pkgs.ncdu ];
+      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2rG0DGvje9CL/MCiA78tbgvypUD1aLqQkHbo/PXAjL'' ];
+    };  
   };
 
   users.groups.automata = { };
