@@ -83,4 +83,12 @@
     ];
     openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICKjtQ/SbNBCTSWimPetOw4veFxXANwPNdprjFiEQa2O'' ];
   };
+  mudrowe = {
+    isNormalUser = true;
+    hashedPasswordFile = config.age.secrets.passwd-mudrowe.path;
+    shell = pkgs.zsh;
+    extraGroups = [ "wheel" ];
+    packages = [ pkgs.git pkgs.screen pkgs.vim pkgs.eza pkgs.htop pkgs.ncdu ];
+    openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2rG0DGvje9CL/MCiA78tbgvypUD1aLqQkHbo/PXAjL'' ];
+  };
 }
