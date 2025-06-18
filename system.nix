@@ -87,7 +87,10 @@
       isNormalUser = false;
       isSystemUser = true;
       group = "mudrowe";
-      openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2rG0DGvje9CL/MCiA78tbgvypUD1aLqQkHbo/PXAjL'' ];
+      openssh.authorizedKeys.keys = [
+        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2rG0DGvje9CL/MCiA78tbgvypUD1aLqQkHbo/PXAjL''
+        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAkXJHtbT3NaoRKVgcalo1uMoYo7vbXM/CFLHoVNBUIt''
+      ];
     };  
   };
 
