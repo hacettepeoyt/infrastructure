@@ -17,7 +17,6 @@
     services/oyt-website.nix
     services/tlkg-website.nix
     services/bitirme-website.nix
-    services/ragopedia.nix
   ];
 
   system.stateVersion = "23.05";
@@ -82,20 +81,9 @@
       group = "automata";
       openssh.authorizedKeys.keys = [ ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAee49tO2W172hMqjiUxIYP7IGNVhwWQt1N8kk/w13WA'' ];
     };
-
-    mudrowe = {
-      isNormalUser = false;
-      isSystemUser = true;
-      group = "mudrowe";
-      openssh.authorizedKeys.keys = [
-        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN2rG0DGvje9CL/MCiA78tbgvypUD1aLqQkHbo/PXAjL''
-        ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAkXJHtbT3NaoRKVgcalo1uMoYo7vbXM/CFLHoVNBUIt''
-      ];
-    };  
   };
 
   users.groups.automata = { };
-  users.groups.mudrowe = { };
 
   environment.systemPackages = [ pkgs.gnuplot ];
 

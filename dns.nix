@@ -67,12 +67,6 @@ in
 
           bitirme      IN      A       ${vflower.ipv4}
                        IN      AAAA    ${vflower.ipv6}
-
-          ragopedia    IN      A       ${vflower.ipv4}
-                       IN      AAAA    ${vflower.ipv6}
- 
-          ragopedia-api IN      A       ${vflower.ipv4}
-                        IN      AAAA    ${vflower.ipv6}
         '';
       };
     };
