@@ -31,6 +31,12 @@ let
   python = pkgs.python311.withPackages (ppkgs: pkg.buildInputs);
 in
 {
+  services.nginx.virtualHosts."www.ozguryazilimhacettepe.com" = {
+    enableACME = true;
+    forceSSL = true;
+    globalRedirect = "ozguryazilimhacettepe.com";
+  };
+
   services.nginx.virtualHosts."ozguryazilimhacettepe.com" = {
     enableACME = true;
     forceSSL = true;
