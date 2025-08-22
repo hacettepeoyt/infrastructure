@@ -1,5 +1,5 @@
 let
-  serverPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDXqBeVR2JHYUatQYM4cy03MKmkotHhR2drHJfzKi/Nl";
+  serverPublicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOHAw3cj1vIgF7D1SNL/tHlPz210Z4Fdr5NjtnyAdm9C";
 
   conf = (import ../system.nix) { config = {}; libs = {}; pkgs = {}; };
 
