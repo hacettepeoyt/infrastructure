@@ -8,7 +8,7 @@
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "virtio_scsi" "usbhid" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "virtio_pci" "virtio_scsi" "usbhid" "sr_mod" "dm-thin-pool" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
@@ -19,8 +19,8 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/923be4d1-36de-4abc-8f86-5f437ad864ef";
-      fsType = "btrfs";
+    { device = "/dev/disk/by-label/main";
+      fsType = "ext4";
     };
 
   fileSystems."/boot" =
@@ -28,6 +28,8 @@
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
+
+  services.lvm.boot.thin.enable = true;
 
   swapDevices = [ ];
 
