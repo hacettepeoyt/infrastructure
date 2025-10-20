@@ -32,3 +32,13 @@ update-input:
 	@nix eval --file flake.nix --apply "inputs: inputs ? $(INPUT)" inputs 2>/dev/null | grep -q true \
 	|| (echo "ERROR: Missing input: $(INPUT)" && exit 1)
 	nix flake update $(INPUT) --commit-lock-file
+
+.PHONY: backup
+backup:
+	@# FIXME: tar has some issues with printing to stdout with ssh -tt, so enforce root for now.
+	ssh -tt -A root@tlkg.org.tr sudo lvcreate -pr -s -n lv_main_backup /dev/vg_main/lv_main
+	ssh -tt -A root@tlkg.org.tr sudo lvchange -ay -Ky vg_main/lv_main_backup
+	ssh -tt -A root@tlkg.org.tr sudo mount -o ro /dev/vg_main/lv_main_backup /mnt-backup
+	ssh -A root@tlkg.org.tr "sudo tar --zstd -C /mnt-backup -vcf - etc/passwd etc/group etc/machine-id etc/ssh home srv var/lib" > backups/vflower-$$(date -u '+%Y-%m-%dT%H:%MZ%Z').tar.zstd
+	ssh -tt -A root@tlkg.org.tr sudo umount /mnt-backup
+	ssh -tt -A root@tlkg.org.tr sudo lvremove -y /dev/vg_main/lv_main_backup
