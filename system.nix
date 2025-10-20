@@ -85,7 +85,11 @@
 
   users.groups.automata = { };
 
-  environment.systemPackages = [ pkgs.gnuplot ];
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.gnuplot
+    pkgs.vim
+  ];
 
   networking.nat = {
     enable = true;
