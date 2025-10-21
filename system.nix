@@ -14,6 +14,7 @@
     services/minecraft.nix
     services/monit.nix
     services/murmur.nix
+    services/notify.nix
     services/oyt-website.nix
     services/tlkg-website.nix
     services/bitirme-website.nix
