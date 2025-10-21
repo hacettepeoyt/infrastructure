@@ -16,6 +16,7 @@ in
 
     locations."/" = {
       proxyPass = "http://localhost:${toString internalPort}";
+      proxyWebsockets = true;
       recommendedProxySettings = true;
     };
   };
