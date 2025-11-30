@@ -1,0 +1,42 @@
+diff --git a/heisenbridge/plumbed_room.py b/heisenbridge/plumbed_room.py
+index d0e41b9..5d88bc1 100644
+--- a/heisenbridge/plumbed_room.py
++++ b/heisenbridge/plumbed_room.py
+@@ -212,25 +212,19 @@ class PlumbedRoom(ChannelRoom):
+         if name.startswith("@" + self.serv.puppet_prefix) and server == self.serv.server_name:
+             return
+ 
+-        # add ZWSP to sender to avoid pinging on IRC
+-        if self.use_zwsp:
+-            sender = f"{name[:2]}\u200B{name[2:]}:{server[:1]}\u200B{server[1:]}"
++        # Always fetch display name directly from /members endpoint
++        try:
++            # Directly call the /members API endpoint with membership=join filter
++            members_resp = await self.az.intent.api.request("GET", f"/_matrix/client/v3/rooms/{self.id}/members?membership=join")
++            for member_event in members_resp.get("chunk", []):
++                if member_event.get("state_key") == event.sender and member_event.get("type") == "m.room.member":
++                    displayname = member_event.get("content", {}).get("displayname")
++                    if displayname:
++                        sender = displayname
++                    break
++        except Exception:
++            pass  # Fall back to MXID if fetch fails
+ 
+-        if self.use_displaynames and event.sender in self.displaynames:
+-            sender_displayname = self.displaynames[event.sender]
+-
+-            # ensure displayname is unique
+-            if self.use_disambiguation:
+-                for user_id, displayname in self.displaynames.items():
+-                    if user_id != event.sender and displayname == sender_displayname:
+-                        sender_displayname += f" ({sender})"
+-                        break
+-
+-            # add ZWSP if displayname matches something on IRC
+-            if self.use_zwsp and len(sender_displayname) > 1:
+-                sender_displayname = f"{sender_displayname[:1]}\u200B{sender_displayname[1:]}"
+-
+-            sender = sender_displayname
+ 
+         # limit plumbed sender max length to 100 characters
+         sender = sender[:100]

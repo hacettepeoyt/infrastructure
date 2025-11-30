@@ -1,0 +1,72 @@
+From a3666fe672db16a5bdfb0a561962c39f42cf8623 Mon Sep 17 00:00:00 2001
+From: Jason Volk <jason@zemos.net>
+Date: Sun, 10 Aug 2025 23:48:25 +0000
+Subject: [PATCH] Use member profile rather than global profile for
+ `joined_members` (fixes #121)
+
+Signed-off-by: Jason Volk <jason@zemos.net>
+---
+ src/api/client/membership/members.rs | 43 ++++++++++++----------------
+ 1 file changed, 19 insertions(+), 24 deletions(-)
+
+diff --git a/src/api/client/membership/members.rs b/src/api/client/membership/members.rs
+index 4cd7e1e21..26a01162a 100644
+--- a/src/api/client/membership/members.rs
++++ b/src/api/client/membership/members.rs
+@@ -31,19 +24,17 @@ pub(crate) async fn get_member_events_route(
+ 	State(services): State<crate::State>,
+ 	body: Ruma<get_member_events::v3::Request>,
+ ) -> Result<get_member_events::v3::Response> {
+-	let sender_user = body.sender_user();
+-	let membership = body.membership.as_ref();
+-	let not_membership = body.not_membership.as_ref();
+-
+ 	if !services
+ 		.rooms
+ 		.state_accessor
+-		.user_can_see_state_events(sender_user, &body.room_id)
++		.user_can_see_state_events(body.sender_user(), &body.room_id)
+ 		.await
+ 	{
+ 		return Err!(Request(Forbidden("You don't have permission to view this room.")));
+ 	}
+ 
++	let membership = body.membership.as_ref();
++	let not_membership = body.not_membership.as_ref();
+ 	Ok(get_member_events::v3::Response {
+ 		chunk: services
+ 			.rooms
+@@ -82,19 +73,23 @@ pub(crate) async fn joined_members_route(
+ 	Ok(joined_members::v3::Response {
+ 		joined: services
+ 			.rooms
+-			.state_cache
+-			.room_members(&body.room_id)
+-			.map(ToOwned::to_owned)
+-			.broad_then(|user_id| async move {
+-				let (display_name, avatar_url) = join(
+-					services.users.displayname(&user_id).ok(),
+-					services.users.avatar_url(&user_id).ok(),
+-				)
+-				.await;
++			.state_accessor
++			.room_state_full(&body.room_id)
++			.ready_filter_map(Result::ok)
++			.ready_filter(|((ty, _), _)| *ty == StateEventType::RoomMember)
++			.map(at!(1))
++			.ready_filter_map(|pdu| {
++				let content = pdu.get_content::<RoomMemberEventContent>().ok()?;
++				let user_id = pdu.state_key()?.parse().ok()?;
++				let member = RoomMember {
++					display_name: content.displayname,
++					avatar_url: content.avatar_url,
++				};
+ 
+-				(user_id, RoomMember { display_name, avatar_url })
++				Some((user_id, member))
+ 			})
+ 			.collect()
++			.boxed()
+ 			.await,
+ 	})
+ }
