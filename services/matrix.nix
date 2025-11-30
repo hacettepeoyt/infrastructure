@@ -2,7 +2,7 @@
   services.matrix-conduit = {
     enable = true;
     package = pkgs.matrix-continuwuity.overrideAttrs (old: {
-      patches = old ++ [
+      patches = old.patches ++ [
         (pkgs.fetchpatch {
           url = "https://github.com/matrix-construct/tuwunel/commit/a3666fe672db16a5bdfb0a561962c39f42cf8623.patch";
           hash = "sha256-JziYREg3vw8NMIPd8Zv8An7XUj+U6dvgRcaZph0DLPe=";
