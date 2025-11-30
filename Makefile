@@ -1,4 +1,4 @@
-HEAVY_FLAKES := .\#inputs.mailpot.outputs.packages.aarch64-linux.default .\#inputs.nixpkgs.outputs.legacyPackages.aarch64-linux.olm
+HEAVY_FLAKES := .\#inputs.mailpot.outputs.packages.aarch64-linux.default .\#inputs.nixpkgs.outputs.legacyPackages.aarch64-linux.olm .\#outputs.nixosConfigurations.vflower.config.services.matrix-conduit.package
 
 .PHONY: help
 help:
