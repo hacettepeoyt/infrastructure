@@ -10,7 +10,7 @@
       url = "github:div72/mailpot";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgsOld.url = "github:NixOS/nixpkgs/8cd5ce828d5d1d16feff37340171a98fc3bf6526";
     hu-announcement-bot = {
       url = "github:hacettepeoyt/hu-announcement-bot";
