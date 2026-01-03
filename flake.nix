@@ -8,7 +8,7 @@
     };
     mailpot = {
       url = "github:div72/mailpot";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgsOld";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgsOld.url = "github:NixOS/nixpkgs/8cd5ce828d5d1d16feff37340171a98fc3bf6526";
@@ -32,17 +32,6 @@
           hu-announcement-bot.nixosModules
           hu-cafeteria-bot.nixosModules
           ./system.nix
-          {
-            nixpkgs.overlays = [
-              (final: prev: {
-                mailpot = mailpot.packages.aarch64-linux.mailpot;
-                # FIXME: continuwuity rc7 and rc8 has bug with joining policy server protected rooms.
-                # Can be removed after release.
-                # See https://forgejo.ellis.link/continuwuation/continuwuity/issues/1060.
-                matrix-continuwuity = nixpkgsOld.legacyPackages.aarch64-linux.matrix-continuwuity;
-              })
-            ];
-          }
         ];
     };
   };
