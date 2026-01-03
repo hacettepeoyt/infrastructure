@@ -110,7 +110,7 @@
     "mailpot": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgsOld"
         ]
       },
       "locked": {
