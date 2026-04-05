@@ -52,4 +52,25 @@
       ];
     });
   };
+
+  services.mautrix-discord = {
+    enable = true;
+
+    settings = {
+      homeserver = {
+        domain = "tlkg.org.tr";
+        address = "https://tlkg.org.tr";
+      };
+
+      bridge.permissions."@div72:tlkg.org.tr" = "admin";
+
+      appservice = {
+        as_token = "$MAUTRIX_DISCORD_AS_TOKEN";
+        hs_token = "$MAUTRIX_DISCORD_HS_TOKEN";
+      };
+    };
+
+    environmentFile = secrets/services/mautrix-discord.age;
+  };
+  age.secrets.mautrix-discord.file = ../secrets/services/mautrix-discord.age;
 }
